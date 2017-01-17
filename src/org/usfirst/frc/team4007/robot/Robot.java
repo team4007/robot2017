@@ -1,11 +1,18 @@
 
 package org.usfirst.frc.team4007.robot;
 
+import edu.wpi.cscore.CvSink;
+import edu.wpi.cscore.CvSource;
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import org.usfirst.frc.team4007.robot.commands.ExampleCommand;
+
+import org.opencv.core.Mat;
+import org.opencv.imgproc.Imgproc;
+import org.usfirst.frc.team4007.robot.commands.StartMotor;
 import org.usfirst.frc.team4007.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -24,7 +31,11 @@ public class Robot extends IterativeRobot {
 
     Command autonomousCommand;
     SendableChooser chooser;
-
+    
+	//CameraServer camServer = CameraServer.getInstance();
+    
+    UsbCamera cam = CameraServer.getInstance().startAutomaticCapture("cam0", 0);
+    
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -32,9 +43,13 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 		oi = new OI();
         chooser = new SendableChooser();
-        chooser.addDefault("Default Auto", new ExampleCommand());
+        chooser.addDefault("Default Auto", new StartMotor());
 //        chooser.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", chooser);
+       
+        /*cam.setFPS(30);
+        cam.setResolution(320, 240);*/
+
     }
 	
 	/**

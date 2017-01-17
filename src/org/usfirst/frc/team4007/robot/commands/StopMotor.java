@@ -8,15 +8,16 @@ import org.usfirst.frc.team4007.robot.Robot;
 /**
  *
  */
-public class ExampleCommand extends Command {
+public class StopMotor extends Command {
 
-    public ExampleCommand() {
+    public StopMotor() {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.exampleSubsystem);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.exampleSubsystem.stop();
     }
 
     // Called repeatedly when this Command is scheduled to run

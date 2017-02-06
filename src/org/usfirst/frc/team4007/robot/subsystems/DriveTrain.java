@@ -17,8 +17,8 @@ public class DriveTrain extends Subsystem {
 	
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-	public CANTalon rouesGauches;
-	public CANTalon rouesDroites;
+	public CANTalon roueGauche;
+	public CANTalon roueDroite;
 	RobotDrive drive;
 	
 	private double drivingSpeed = .25;
@@ -26,14 +26,23 @@ public class DriveTrain extends Subsystem {
 	
 	public DriveTrain() {
 		super();
-		rouesGauches = new CANTalon(RobotMap.canTalonRouesGauches);
-		rouesDroites = new CANTalon(RobotMap.canTalonRouesDroites);
+		roueGauche = new CANTalon(RobotMap.canTalonRouesGauches);
+		roueDroite = new CANTalon(RobotMap.canTalonRouesDroites);
 
-		drive = new RobotDrive(rouesGauches, rouesDroites);
+		drive = new RobotDrive(roueGauche, roueDroite);
 		
 
 	}
 	
+	public CANTalon getRoue(int numero){
+		if (numero == 0){
+			return roueGauche;
+		}
+		else {
+			return roueDroite;		
+		}
+	
+	}
 	
 
     public void initDefaultCommand() {
@@ -42,8 +51,8 @@ public class DriveTrain extends Subsystem {
     }
     
     public void stop() {
-    	rouesGauches.stopMotor();
-    	rouesDroites.stopMotor();
+    	roueGauche.disableControl();
+    	roueDroite.disableControl();
     }
     
     public void drive(Joystick joystick) {

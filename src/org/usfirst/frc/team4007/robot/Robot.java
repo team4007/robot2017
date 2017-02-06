@@ -3,6 +3,7 @@ package org.usfirst.frc.team4007.robot;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -11,6 +12,9 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import org.usfirst.frc.team4007.robot.commands.StartMotor;
 import org.usfirst.frc.team4007.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4007.robot.subsystems.ExampleSubsystem;
+
+import com.ctre.CANTalon;
+
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -27,12 +31,12 @@ public class Robot extends IterativeRobot {
 	public static final DriveTrain driveTrain = new DriveTrain();
 	public static OI oi;
 
-    Command autonomousCommand;
-    SendableChooser chooser;
-    
+    DigitalInput switch0;
+    DigitalInput switch1;
+    DigitalInput switch2;
 	//CameraServer camServer = CameraServer.getInstance();
     
-    UsbCamera cam = CameraServer.getInstance().startAutomaticCapture("cam0", 0);
+    //UsbCamera cam = CameraServer.getInstance().startAutomaticCapture("cam0", 0);
     
     /**
      * This function is run when the robot is first started up and should be
@@ -40,11 +44,11 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
 		oi = new OI();
-        chooser = new SendableChooser();
-        chooser.addDefault("Default Auto", new StartMotor());
-//        chooser.addObject("My Auto", new MyAutoCommand());
-        SmartDashboard.putData("Auto mode", chooser);
        
+       
+        switch0 = new DigitalInput(0);
+        switch1 = new DigitalInput(1);
+        switch2 = new DigitalInput(2);
         /*cam.setFPS(30);
         cam.setResolution(320, 240);*/
 
@@ -73,21 +77,40 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-        autonomousCommand = (Command) chooser.getSelected();
-        
-		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
-		switch(autoSelected) {
-		case "My Auto":
-			autonomousCommand = new MyAutoCommand();
-			break;
-		case "Default Auto":
-		default:
-			autonomousCommand = new ExampleCommand();
-			break;
-		} */
     	
-    	// schedule the autonomous command (example)
-        if (autonomousCommand != null) autonomousCommand.start();
+    	int bigmac0 = switch0.get() ? 1 : 0;
+    	int bigmac1 = switch1.get() ? 1 : 0;
+    	int bigmac2 = switch2.get() ? 1 : 0;
+    	
+    	int config = bigmac0 + (bigmac1 << 1) + (bigmac2 << 2);
+    	
+    	switch(config){
+    	case 0:
+    		System.out.println("J'ai pas d'argent #Jacob");
+    		break;
+    	case 1:
+    		System.out.println("Un bigmac svp");
+    		break;
+    	case 2:
+    		System.out.println("Deux bigmacs svp");
+    		break;
+    	case 3:
+    		System.out.println("Trois bigmacs svp");
+    		break;
+    	case 4:
+    		System.out.println("Quatre bigmacs svp");
+    		break;
+    	case 5:
+    		System.out.println("Un trio bigmac svp");
+    		break;
+    	case 6:
+    		System.out.println("Deux trios bigmac svp");  		
+    		break;
+    	case 7:
+    		System.out.println("Trois trios bigmac svp");
+    		break;
+    	}
+    	
     }
 
     /**
@@ -98,11 +121,8 @@ public class Robot extends IterativeRobot {
     }
 
     public void teleopInit() {
-		// This makes sure that the autonomous stops running when
-        // teleop starts running. If you want the autonomous to 
-        // continue until interrupted by another command, remove
-        // this line or comment it out.
-        if (autonomousCommand != null) autonomousCommand.cancel();
+		
+    	
     }
 
     /**

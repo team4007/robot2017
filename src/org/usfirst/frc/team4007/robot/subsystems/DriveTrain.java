@@ -21,7 +21,6 @@ public class DriveTrain extends Subsystem {
 	public CANTalon roueDroite;
 	RobotDrive drive;
 	
-	private double drivingSpeed = .25;
 	
 	
 	public DriveTrain() {

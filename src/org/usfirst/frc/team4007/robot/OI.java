@@ -1,5 +1,7 @@
 package org.usfirst.frc.team4007.robot;
 
+import org.usfirst.frc.team4007.robot.commands.Grimpe;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
@@ -36,10 +38,14 @@ public class OI {
     // button.whenReleased(new ExampleCommand());
 	public Joystick joystickGauche;
 	public Joystick joystickDroit;
+	public JoystickButton btnGrimpeur;
 	
 	public OI(){
 		joystickGauche = new Joystick(RobotMap.portJoystickGauche);
 		joystickDroit = new Joystick (RobotMap.portJoystickDroit);
+		btnGrimpeur = new JoystickButton(joystickDroit,RobotMap.btnGrimpeur);
+		
+		btnGrimpeur.whenPressed(new Grimpe());
 		
 	}
 }

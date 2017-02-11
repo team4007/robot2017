@@ -1,6 +1,8 @@
 package org.usfirst.frc.team4007.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Relay;
+import edu.wpi.first.wpilibj.Relay.Direction;
+import edu.wpi.first.wpilibj.Relay.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -17,6 +19,15 @@ public class Grimpeur extends Subsystem {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
+    	
+    }
+    
+    public void demarre(){
+    	moteur.set(Value.kForward);
+    }
+    
+    public void arret(){
+    	moteur.set(Value.kOff);
     }
 }
 

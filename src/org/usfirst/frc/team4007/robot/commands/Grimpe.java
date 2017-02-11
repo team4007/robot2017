@@ -1,6 +1,7 @@
 package org.usfirst.frc.team4007.robot.commands;
 
 import org.usfirst.frc.team4007.robot.Robot;
+import org.usfirst.frc.team4007.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -19,6 +20,7 @@ public class Grimpe extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.grimpeur.demarre(); 
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -27,11 +29,12 @@ public class Grimpe extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return !Robot.oi.joystickDroit.getRawButton(RobotMap.btnGrimpeur);
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.grimpeur.arret();
     }
 
     // Called when another command which requires one or more of the same

@@ -1,5 +1,7 @@
 package org.usfirst.frc.team4007.robot.commands;
 
+import org.usfirst.frc.team4007.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -10,6 +12,7 @@ public class Grimpe extends Command {
     public Grimpe() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	requires (Robot.grimpeur);
     	
     
     }

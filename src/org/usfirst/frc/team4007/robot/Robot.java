@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import org.usfirst.frc.team4007.robot.commands.AutonomousOne;
 import org.usfirst.frc.team4007.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4007.robot.subsystems.Gear;
+import org.usfirst.frc.team4007.robot.subsystems.Grimpeur;
 
 import com.ctre.CANTalon;
 
@@ -27,6 +28,7 @@ public class Robot extends IterativeRobot {
 	
 	public static final DriveTrain driveTrain = new DriveTrain();
 	public static final Gear gear = new Gear();
+	public static final Grimpeur grimpeur = new Grimpeur();
 	public static OI oi;
 
     DigitalInput switch0;

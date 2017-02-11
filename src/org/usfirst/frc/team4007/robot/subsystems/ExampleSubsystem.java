@@ -16,7 +16,7 @@ public class ExampleSubsystem extends Subsystem {
     // here. Call these from Commands.
 	AnalogTrigger trigger;
 	
-	Relay danny;
+	Relay moteur;
     public void initDefaultCommand() {
     	trigger = new AnalogTrigger(0);
         // Set the default command for a subsystem here.
@@ -27,14 +27,14 @@ public class ExampleSubsystem extends Subsystem {
 	}
     
     public ExampleSubsystem(){
-    	danny = new Relay(0);
+    	moteur = new Relay(0);
     }
     
     public void start(){
-    	danny.set(Value.kForward);
+    	moteur.set(Value.kForward);
     }
     public void stop(){
-    	danny.set(Value.kOff);
+    	moteur.set(Value.kOff);
     }
 }
 

@@ -7,8 +7,11 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
+import org.usfirst.frc.team4007.robot.commands.AutonomousOne;
+import org.usfirst.frc.team4007.robot.commands.Forward;
 import org.usfirst.frc.team4007.robot.commands.StartMotor;
 import org.usfirst.frc.team4007.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4007.robot.subsystems.ExampleSubsystem;
@@ -50,8 +53,8 @@ public class Robot extends IterativeRobot {
         switch1 = new DigitalInput(1);
         switch2 = new DigitalInput(2);
         /*cam.setFPS(30);
-        cam.setResolution(320, 240);*/
-
+        cam.setResolution(320, 240);*/      
+        
     }
 	
 	/**
@@ -78,36 +81,41 @@ public class Robot extends IterativeRobot {
 	 */
     public void autonomousInit() {
     	
-    	int bigmac0 = switch0.get() ? 1 : 0;
-    	int bigmac1 = switch1.get() ? 1 : 0;
-    	int bigmac2 = switch2.get() ? 1 : 0;
+    	int switch0Value = switch0.get() ? 1 : 0;
+    	int switch1Value = switch1.get() ? 1 : 0;
+    	int switch2Value = switch2.get() ? 1 : 0;
     	
-    	int config = bigmac0 + (bigmac1 << 1) + (bigmac2 << 2);
+    	int config = switch0Value + (switch1Value << 1) + (switch2Value << 2);
     	
+		AutonomousOne start1 = new AutonomousOne();
+		
+		
     	switch(config){
     	case 0:
-    		System.out.println("J'ai pas d'argent #Jacob");
+    		System.out.println("Start #0");
+    		System.out.println("Autonome : Reste sur place");
     		break;
     	case 1:
-    		System.out.println("Un bigmac svp");
+    		System.out.println("Start #1");
+    		start1.start();
     		break;
     	case 2:
-    		System.out.println("Deux bigmacs svp");
+    		System.out.println("Start #2");    		
     		break;
     	case 3:
-    		System.out.println("Trois bigmacs svp");
+    		System.out.println("Start #3");
     		break;
     	case 4:
-    		System.out.println("Quatre bigmacs svp");
+    		System.out.println("Start #4");
     		break;
     	case 5:
-    		System.out.println("Un trio bigmac svp");
+    		System.out.println("Start #5");
     		break;
     	case 6:
-    		System.out.println("Deux trios bigmac svp");  		
+    		System.out.println("Start #6");  		
     		break;
     	case 7:
-    		System.out.println("Trois trios bigmac svp");
+    		System.out.println("Start #7");
     		break;
     	}
     	

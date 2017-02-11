@@ -16,7 +16,12 @@ public class Gear extends Subsystem {
 
 	public CANTalon moteur;
 	public AnalogTrigger analogtrigger;
-	public Counter counter;  
+	public Counter counter;
+	
+	public Gear(){
+		super();
+		
+	}
 	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.

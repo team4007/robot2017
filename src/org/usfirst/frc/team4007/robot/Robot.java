@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import org.usfirst.frc.team4007.robot.commands.AutonomousOne;
+import org.usfirst.frc.team4007.robot.commands.DriveWithJoystick;
 import org.usfirst.frc.team4007.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4007.robot.subsystems.Gear;
 import org.usfirst.frc.team4007.robot.subsystems.Grimpeur;
@@ -26,9 +27,9 @@ import com.ctre.CANTalon;
  */
 public class Robot extends IterativeRobot {
 	
-	public static final DriveTrain driveTrain = new DriveTrain();
-	public static final Gear gear = new Gear();
-	public static final Grimpeur grimpeur = new Grimpeur();
+	public static DriveTrain driveTrain;
+	public static Gear gear;
+	public static Grimpeur grimpeur;
 	public static OI oi;
 
     DigitalInput switch0;
@@ -43,6 +44,9 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
+    	driveTrain = new DriveTrain();
+    	gear = new Gear();
+    	grimpeur = new Grimpeur();
 		oi = new OI();
        
        
@@ -126,14 +130,20 @@ public class Robot extends IterativeRobot {
     }
 
     public void teleopInit() {
-		
     }
 
     /**
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-        Scheduler.getInstance().run();
+    	/*if(Robot.oi.joystickDroit.getRawButton(3)){
+    		grimpeur.demarre();
+    	}else {
+			grimpeur.arret();
+		}*/
+    	
+        driveTrain.drive(Robot.oi.joystickGauche, Robot.oi.joystickDroit);
+        //System.out.println(Robot.oi.joystickDroit.getRawButton(RobotMap.btnGrimpeur));
     }
     
     /**

@@ -1,8 +1,9 @@
 package org.usfirst.frc.team4007.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Relay;
-import edu.wpi.first.wpilibj.Relay.Direction;
-import edu.wpi.first.wpilibj.Relay.Value;
+import org.usfirst.frc.team4007.robot.RobotMap;
+
+import com.ctre.CANTalon;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -12,9 +13,12 @@ public class Grimpeur extends Subsystem {
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
+	public CANTalon moteur;
 	
-	public Relay moteur = new Relay(0);
-	
+	public Grimpeur(){
+		super();
+		moteur = new CANTalon(RobotMap.canTalonWinch);
+	}
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -23,11 +27,11 @@ public class Grimpeur extends Subsystem {
     }
     
     public void demarre(){
-    	moteur.set(Value.kForward);
+    	moteur.set(-1.0);
     }
     
     public void arret(){
-    	moteur.set(Value.kOff);
+    	moteur.set(0.0);
     }
 }
 

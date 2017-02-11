@@ -1,8 +1,6 @@
 package org.usfirst.frc.team4007.robot.commands;
 
 import org.usfirst.frc.team4007.robot.Robot;
-import org.usfirst.frc.team4007.robot.RobotMap;
-
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -13,23 +11,24 @@ public class Grimpe extends Command {
     public Grimpe() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires (Robot.grimpeur);
+    	requires(Robot.grimpeur);
     	
     
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.grimpeur.demarre(); 
+    	System.out.println("Winch en marche");
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	Robot.grimpeur.demarre();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return !Robot.oi.joystickDroit.getRawButton(RobotMap.btnGrimpeur);
+        return false;
     }
 
     // Called once after isFinished returns true
@@ -40,5 +39,6 @@ public class Grimpe extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }

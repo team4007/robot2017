@@ -37,12 +37,11 @@ public class OI {
     // button.whenReleased(new ExampleCommand());
 	public Joystick joystickGauche;
 	public Joystick joystickDroit;
-	public JoystickButton btnGrimpeur;
 	
 	public OI(){
 		joystickGauche = new Joystick(RobotMap.portJoystickGauche);
 		joystickDroit = new Joystick (RobotMap.portJoystickDroit);
-		btnGrimpeur = new JoystickButton(joystickDroit, RobotMap.btnGrimpeur);
+		JoystickButton btnGrimpeur = new JoystickButton(joystickDroit, RobotMap.btnGrimpeur);
 		
 		btnGrimpeur.whileHeld(new Grimpe());
 	}

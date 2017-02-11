@@ -1,6 +1,7 @@
 package org.usfirst.frc.team4007.robot.subsystems;
 
 import org.usfirst.frc.team4007.robot.RobotMap;
+import org.usfirst.frc.team4007.robot.commands.Grimpe;
 
 import com.ctre.CANTalon;
 
@@ -23,6 +24,7 @@ public class Grimpeur extends Subsystem {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
+    	setDefaultCommand(new Grimpe());
     	
     }
     

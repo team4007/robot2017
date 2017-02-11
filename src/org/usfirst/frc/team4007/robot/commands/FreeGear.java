@@ -1,5 +1,7 @@
 package org.usfirst.frc.team4007.robot.commands;
 
+import org.usfirst.frc.team4007.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -10,7 +12,7 @@ public class FreeGear extends Command {
     public FreeGear() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	//requires(Gear)
+    	requires(Robot.gear);
     }
 
     // Called just before this Command runs the first time

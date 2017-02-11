@@ -11,16 +11,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import org.usfirst.frc.team4007.robot.commands.AutonomousOne;
-import org.usfirst.frc.team4007.robot.commands.Forward;
-import org.usfirst.frc.team4007.robot.commands.StartMotor;
 import org.usfirst.frc.team4007.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team4007.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team4007.robot.subsystems.Gear;
 
 import com.ctre.CANTalon;
-
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -30,8 +24,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * directory.
  */
 public class Robot extends IterativeRobot {
-
-	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
+	
 	public static final DriveTrain driveTrain = new DriveTrain();
 	public static final Gear gear = new Gear();
 	public static OI oi;

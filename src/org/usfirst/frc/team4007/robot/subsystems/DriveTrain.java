@@ -53,8 +53,8 @@ public class DriveTrain extends Subsystem {
     	roueDroite.disableControl();
     }
     
-    public void drive(Joystick joystick) {
-    	drive.arcadeDrive(-joystick.getY(), -joystick.getX());
+    public void drive(Joystick leftStick, Joystick rightStick) {
+    	drive.tankDrive(leftStick, rightStick);
     	    	
     }
 }

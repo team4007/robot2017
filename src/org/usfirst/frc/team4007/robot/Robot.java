@@ -32,9 +32,6 @@ public class Robot extends IterativeRobot {
 	public static Grimpeur grimpeur;
 	public static OI oi;
 
-    DigitalInput switch0;
-    DigitalInput switch1;
-    DigitalInput switch2;
 	//CameraServer camServer = CameraServer.getInstance();
     
     //UsbCamera cam = CameraServer.getInstance().startAutomaticCapture("cam0", 0);
@@ -48,11 +45,7 @@ public class Robot extends IterativeRobot {
     	gear = new Gear();
     	grimpeur = new Grimpeur();
 		oi = new OI();
-       
-       
-        switch0 = new DigitalInput(0);
-        switch1 = new DigitalInput(1);
-        switch2 = new DigitalInput(2);
+
         /*cam.setFPS(30);
         cam.setResolution(320, 240);*/      
         
@@ -81,31 +74,8 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-    	
-    	int switch0Value = switch0.get() ? 1 : 0;
-    	int switch1Value = switch1.get() ? 1 : 0;
-    	int switch2Value = switch2.get() ? 1 : 0;
-    	
-    	int config = switch0Value + (switch1Value << 1) + (switch2Value << 2);
-    	
-		AutonomousCommands start1 = new AutonomousCommands();
-		
-		
-    	switch(config){
-    	case 0:
-    		System.out.println("Start #0");
-    		System.out.println("Autonome : Reste sur place");
-    		break;
-    	case 1:
-    		System.out.println("Start #1");
-    		start1.start();
-    		break;
-    	case 2:
-    		System.out.println("Start #2");    		
-    		break;
-    	case 3:
-    		System.out.println("Start #3");
-    	}
+		AutonomousCommands autonomous = new AutonomousCommands();
+		autonomous.start();
     	
     }
 

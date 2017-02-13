@@ -24,11 +24,12 @@ public class Grimpeur extends Subsystem {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
-    	setDefaultCommand(new Grimpe());
+    	//setDefaultCommand(new Grimpe());
     	
     }
     
     public void demarre(){
+    	//System.out.println("GRIMPEUR DEMARRE");
     	moteur.set(-1.0);
     }
     

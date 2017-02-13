@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
-import org.usfirst.frc.team4007.robot.commands.AutonomousCaseOne;
+import org.usfirst.frc.team4007.robot.commands.AutonomousCommands;
 import org.usfirst.frc.team4007.robot.commands.DriveWithJoystick;
 import org.usfirst.frc.team4007.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4007.robot.subsystems.Gear;
@@ -88,7 +88,7 @@ public class Robot extends IterativeRobot {
     	
     	int config = switch0Value + (switch1Value << 1) + (switch2Value << 2);
     	
-		AutonomousCaseOne start1 = new AutonomousCaseOne();
+		AutonomousCommands start1 = new AutonomousCommands();
 		
 		
     	switch(config){

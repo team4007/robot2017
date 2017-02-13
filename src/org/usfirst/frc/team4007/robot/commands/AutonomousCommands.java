@@ -6,9 +6,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
  */
-public class AutonomousCaseOne extends CommandGroup {
+public class AutonomousCommands extends CommandGroup {
 	
-	 public  AutonomousCaseOne() {
+	 public  AutonomousCommands() {
 	    	addSequential(new Forward());;
 	    }	
 	

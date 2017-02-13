@@ -18,12 +18,12 @@ public class RobotMap {
 	
 	//public static int cantalonPort = 0;
 	
-	public static final int canTalonRouesGauches = 0;
+	public static final int canTalonRouesGauches = 3;
 	public static final int canTalonRouesDroites = 0;
 	public static final int canTalonWinch = 1;
 	
-	public static final int portJoystickGauche = 0;
-	public static final int portJoystickDroit = 1;
+	public static final int portJoystickGauche = 1;
+	public static final int portJoystickDroit = 2;
 	
 	public static final int btnGrimpeur = 3;
 	public static final int btnLanceur = 2;

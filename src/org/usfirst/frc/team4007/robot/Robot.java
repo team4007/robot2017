@@ -1,22 +1,14 @@
 
 package org.usfirst.frc.team4007.robot;
 
-import edu.wpi.cscore.UsbCamera;
-import edu.wpi.first.wpilibj.CameraServer;
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import org.usfirst.frc.team4007.robot.commands.AutonomousCommands;
-import org.usfirst.frc.team4007.robot.commands.DriveWithJoystick;
 import org.usfirst.frc.team4007.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4007.robot.subsystems.Gear;
 import org.usfirst.frc.team4007.robot.subsystems.Grimpeur;
-
-import com.ctre.CANTalon;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -41,10 +33,11 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
+    	oi = new OI();
     	driveTrain = new DriveTrain();
-    	gear = new Gear();
-    	grimpeur = new Grimpeur();
-		oi = new OI();
+    	//gear = new Gear();
+    	//grimpeur = new Grimpeur();
+		
 
         /*cam.setFPS(30);
         cam.setResolution(320, 240);*/      

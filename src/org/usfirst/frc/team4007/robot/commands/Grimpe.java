@@ -10,11 +10,12 @@ public class Grimpe extends Command {
 
     public Grimpe() {
     	requires(Robot.grimpeur);
+    	System.out.println("Grimpe constructeur");
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	//System.out.println("Winch en marche");
+    	System.out.println("Grimpe inits");
     	Robot.grimpeur.demarre();
 
     }

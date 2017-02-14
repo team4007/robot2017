@@ -29,7 +29,7 @@ public class Grimpeur extends Subsystem {
     }
     
     public void demarre(){
-    	//System.out.println("GRIMPEUR DEMARRE");
+    	System.out.println("GRIMPEUR DEMARRE");
     	moteur.set(-1.0);
     }
     

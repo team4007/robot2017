@@ -29,7 +29,7 @@ public class AutonomousCommands extends CommandGroup {
 	    	case 0:
 	    		System.out.println("Start #0");
 	    		System.out.println("Autonome : Reste sur place");
-		    	addSequential(new RunForestRun());;
+		    	//addSequential(new RunForestRun());;
 	    		break;
 	    	case 1:
 	    		System.out.println("Start #1");

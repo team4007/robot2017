@@ -20,7 +20,7 @@ import org.usfirst.frc.team4007.robot.subsystems.Grimpeur;
 public class Robot extends IterativeRobot {
 	
 	public static DriveTrain driveTrain = new DriveTrain();;
-	public static Gear gear;
+	public static Gear gear = new Gear();
 	public static Grimpeur grimpeur = new Grimpeur();;
 	public static OI oi = new OI();;
 	
@@ -35,8 +35,7 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-    	//gear = new Gear();
-		
+	
 
         /*cam.setFPS(30);
         cam.setResolution(320, 240);*/      
@@ -87,12 +86,7 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-    	/*if(Robot.oi.joystickDroit.getRawButton(3)){
-    		grimpeur.demarre();
-    	}else {
-			grimpeur.arret();
-		}*/
-    	
+    	Scheduler.getInstance().run();
         driveTrain.drive(Robot.oi.joystickGauche, Robot.oi.joystickDroit);
         //System.out.println(Robot.oi.joystickDroit.getRawButton(RobotMap.btnGrimpeur));
     }

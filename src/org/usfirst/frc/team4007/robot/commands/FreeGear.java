@@ -17,15 +17,27 @@ public class FreeGear extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	System.out.println("timestamp init: " + Robot.gear.counter.readRisingTimestamp());
+    	Robot.gear.demarreOuvre();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	System.out.println("timestamp ex " + Robot.gear.counter.readRisingTimestamp());
+    		Robot.gear.demarreOuvre();
+       
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+    	System.out.println("timestamp is finish " + Robot.gear.counter.readRisingTimestamp());
+    	if(Robot.gear.counter.readRisingTimestamp() > 1000000) {
+    		return true;
+    	}else{
+    		return false;
+       	}
+    		
+        
     }
 
     // Called once after isFinished returns true

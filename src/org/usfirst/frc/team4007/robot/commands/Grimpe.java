@@ -16,7 +16,7 @@ public class Grimpe extends Command {
     protected void initialize() {
     	//System.out.println("Winch en marche");
     	Robot.grimpeur.demarre();
-    	this.setTimeout(2);
+
     }
 
     // Called repeatedly when this Command is scheduled to run

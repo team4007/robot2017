@@ -42,9 +42,9 @@ public class OI {
 		joystickGauche = new Joystick(RobotMap.portJoystickGauche);
 		joystickDroit = new Joystick (RobotMap.portJoystickDroit);
 		
-		//JoystickButton btnGrimpeur = new JoystickButton(joystickDroit, RobotMap.btnGrimpeur);
+		JoystickButton btnGrimpeur = new JoystickButton(joystickDroit, RobotMap.btnGrimpeur);
 		
-		//btnGrimpeur.whenActive(new Grimpe());
+		btnGrimpeur.whenActive(new Grimpe());
 	}
 }
 

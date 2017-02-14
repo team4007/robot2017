@@ -19,10 +19,12 @@ import org.usfirst.frc.team4007.robot.subsystems.Grimpeur;
  */
 public class Robot extends IterativeRobot {
 	
-	public static DriveTrain driveTrain;
+	public static DriveTrain driveTrain = new DriveTrain();;
 	public static Gear gear;
-	public static Grimpeur grimpeur;
-	public static OI oi;
+	public static Grimpeur grimpeur = new Grimpeur();;
+	public static OI oi = new OI();;
+	
+	AutonomousCommands autonomous;
 
 	//CameraServer camServer = CameraServer.getInstance();
     
@@ -33,10 +35,7 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-    	oi = new OI();
-    	driveTrain = new DriveTrain();
     	//gear = new Gear();
-    	//grimpeur = new Grimpeur();
 		
 
         /*cam.setFPS(30);
@@ -67,7 +66,7 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-		AutonomousCommands autonomous = new AutonomousCommands();
+		autonomous = new AutonomousCommands();
 		autonomous.start();
     	
     }
@@ -80,6 +79,8 @@ public class Robot extends IterativeRobot {
     }
 
     public void teleopInit() {
+    	if (autonomous != null) autonomous.cancel();
+    	
     }
 
     /**

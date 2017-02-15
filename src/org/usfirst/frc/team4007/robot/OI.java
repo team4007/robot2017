@@ -1,8 +1,11 @@
 package org.usfirst.frc.team4007.robot;
 
 import org.usfirst.frc.team4007.robot.commands.Grimpe;
+import org.usfirst.frc.team4007.robot.commands.StopGrimpe;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -44,7 +47,9 @@ public class OI {
 		
 		JoystickButton btnGrimpeur = new JoystickButton(joystickDroit, RobotMap.btnGrimpeur);
 		
-		btnGrimpeur.whenPressed(new Grimpe());
+		btnGrimpeur.whenPressed( new Grimpe());
+		btnGrimpeur.whenReleased(new StopGrimpe());
+		
 	}
 }
 

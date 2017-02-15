@@ -9,6 +9,7 @@ import org.usfirst.frc.team4007.robot.commands.AutonomousCommands;
 import org.usfirst.frc.team4007.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4007.robot.subsystems.Gear;
 import org.usfirst.frc.team4007.robot.subsystems.Grimpeur;
+import org.usfirst.frc.team4007.robot.subsystems.LanceBalle;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -19,10 +20,11 @@ import org.usfirst.frc.team4007.robot.subsystems.Grimpeur;
  */
 public class Robot extends IterativeRobot {
 	
-	public static DriveTrain driveTrain = new DriveTrain();;
+	public static DriveTrain driveTrain = new DriveTrain();
 	public static Gear gear = new Gear();
-	public static Grimpeur grimpeur = new Grimpeur();;
-	public static OI oi = new OI();;
+	public static Grimpeur grimpeur = new Grimpeur();
+	public static OI oi = new OI();
+	public static LanceBalle lanceBalle = new LanceBalle();
 	
 	AutonomousCommands autonomous;
 

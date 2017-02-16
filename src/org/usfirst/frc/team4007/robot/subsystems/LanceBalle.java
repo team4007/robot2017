@@ -36,12 +36,12 @@ public class LanceBalle extends Subsystem {
     }
     
     public void startBalleWheel(){
-    	spineWheel.enable();
+    	spineWheel.set(-1.0);
     }
 
 	public void stopBalleWheel() {
 		// TODO Auto-generated method stub
-		spineWheel.disable();
+		spineWheel.set(0.0);
 	}
 }
 

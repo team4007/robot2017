@@ -13,11 +13,13 @@ public class StartBalleLanceur extends Command {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.lanceBalle);
+    	System.out.println("INIT ball wheel");
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.lanceBalle.stopBalleWheel();
+    	System.out.println("Start ball wheel");
+    	Robot.lanceBalle.startBalleWheel();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -26,11 +28,13 @@ public class StartBalleLanceur extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return !Robot.oi.btnLanceurDroit.get();
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	System.out.println("Fin ball wheel");
+    	Robot.lanceBalle.stopBalleWheel();
     }
 
     // Called when another command which requires one or more of the same

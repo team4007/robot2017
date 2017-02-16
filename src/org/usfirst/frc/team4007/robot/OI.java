@@ -1,7 +1,8 @@
 package org.usfirst.frc.team4007.robot;
 
 import org.usfirst.frc.team4007.robot.commands.Grimpe;
-import org.usfirst.frc.team4007.robot.commands.StopGrimpe;
+import org.usfirst.frc.team4007.robot.commands.StartBalleBrasseur;
+import org.usfirst.frc.team4007.robot.commands.StartBalleLanceur;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -40,17 +41,20 @@ public class OI {
     // button.whenReleased(new ExampleCommand());
 	public Joystick joystickGauche;
 	public Joystick joystickDroit;
-	
+	public JoystickButton btnGrimpeur;
+	public JoystickButton btnLanceurDroit;
+	public JoystickButton btnBrasseurGauche;
 	public OI(){
 		joystickGauche = new Joystick(RobotMap.portJoystickGauche);
 		joystickDroit = new Joystick (RobotMap.portJoystickDroit);
 		
-		JoystickButton btnGrimpeur = new JoystickButton(joystickDroit, RobotMap.btnGrimpeur);
+		btnGrimpeur = new JoystickButton(joystickDroit, RobotMap.btnGrimpeur);		
+		btnLanceurDroit = new JoystickButton(joystickDroit, RobotMap.btnLanceur);
+		btnBrasseurGauche = new JoystickButton(joystickGauche, RobotMap.btnBrasseurLanceur);
 		
-		//JoystickButton btn = new JoystickButton(joystickDroit, RobotMap.btnGrimpeur);
-		
-		btnGrimpeur.whenPressed( new Grimpe());
-		btnGrimpeur.whenReleased(new StopGrimpe());
+		btnGrimpeur.whenPressed(new Grimpe());		
+		btnLanceurDroit.whenPressed(new StartBalleLanceur());		
+		btnBrasseurGauche.whenPressed(new StartBalleBrasseur());
 		
 	}
 }

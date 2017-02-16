@@ -1,5 +1,6 @@
 package org.usfirst.frc.team4007.robot.commands;
 
+import org.usfirst.frc.team4007.robot.OI;
 import org.usfirst.frc.team4007.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -27,7 +28,7 @@ public class Grimpe extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return !Robot.oi.btnGrimpeur.get();
     }
 
     // Called once after isFinished returns true

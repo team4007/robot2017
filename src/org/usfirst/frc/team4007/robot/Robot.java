@@ -20,11 +20,17 @@ import org.usfirst.frc.team4007.robot.subsystems.LanceBalle;
  */
 public class Robot extends IterativeRobot {
 	
+	/* BEGIN TOUS LES SOUS SYSTEMS DOIVENT ETRE DECLARER ICI */
 	public static DriveTrain driveTrain = new DriveTrain();
 	public static Gear gear = new Gear();
 	public static Grimpeur grimpeur = new Grimpeur();
-	public static OI oi = new OI();
 	public static LanceBalle lanceBalle = new LanceBalle();
+	/* END TOUS LES SOUS SYSTEMS DOIVENT ETRE DECLARER ICI */
+	
+	
+	/* CECI DOIT ETRE INSTANCIER EN DERNIER */
+	public static OI oi = new OI();
+	
 	
 	AutonomousCommands autonomous;
 

@@ -22,7 +22,7 @@ public class RobotMap {
 	public static final int canTalonRouesDroites = 0;
 	public static final int canTalonWinch = 1;
 	
-	public static final int spikeGear = 3;
+	public static final int spikeGear = 0;
 	public static final int analogGear = 3;
 
 	public static final int spikeLanceBalle = 1;
@@ -32,6 +32,7 @@ public class RobotMap {
 	public static final int portJoystickDroit = 2;
 	
 	public static final int btnGrimpeur = 3;
-	public static final int btnLanceur = 2;
+	public static final int btnLanceur = 1;
+	public static final int btnBrasseurLanceur = 1;
 	public static final int btnGear = 4;
 }

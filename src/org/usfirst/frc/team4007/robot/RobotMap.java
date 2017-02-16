@@ -35,4 +35,10 @@ public class RobotMap {
 	public static final int btnLanceur = 1;
 	public static final int btnBrasseurLanceur = 1;
 	public static final int btnGear = 4;
+	
+	public static final int btnCameraUp = 11;
+	public static final int btnCameraMid = 10;
+	public static final int btnCameraDown = 9;
+	public static final int PWMcamera = 0;
+	
 }

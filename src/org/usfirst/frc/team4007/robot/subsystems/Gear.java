@@ -2,6 +2,7 @@ package org.usfirst.frc.team4007.robot.subsystems;
 
 import java.time.format.ResolverStyle;
 
+import org.usfirst.frc.team4007.robot.Robot;
 import org.usfirst.frc.team4007.robot.RobotMap;
 
 import com.ctre.CANTalon;
@@ -10,9 +11,11 @@ import edu.wpi.first.wpilibj.AnalogTrigger;
 import edu.wpi.first.wpilibj.AnalogTriggerOutput;
 import edu.wpi.first.wpilibj.AnalogTriggerOutput.AnalogTriggerType;
 import edu.wpi.first.wpilibj.Counter;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Relay.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.hal.EncoderJNI;
 
 /**
  *
@@ -25,13 +28,14 @@ public class Gear extends Subsystem {
 	public Relay moteur;
 	public AnalogTrigger analogtrigger;
 	public AnalogTriggerOutput counter;
-	
 	public Gear(){
 		super();
 		moteur = new Relay(RobotMap.spikeGear);
 		analogtrigger = new AnalogTrigger(RobotMap.analogGear);
-		counter = analogtrigger.createOutput(AnalogTriggerType.kRisingPulse);
-		analogtrigger.setLimitsVoltage(0, 5);
+		analogtrigger.setLimitsVoltage(0, 0.1);
+		//counter = analogtrigger.createOutput(AnalogTriggerType.kFallingPulse);
+		analogtrigger.setAveraged(true);
+		//counter.disableInterrupts();
 	}
 	
     public void initDefaultCommand() {

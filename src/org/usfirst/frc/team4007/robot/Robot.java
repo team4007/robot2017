@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import org.usfirst.frc.team4007.robot.commands.AutonomousCommands;
+import org.usfirst.frc.team4007.robot.subsystems.Camera;
 import org.usfirst.frc.team4007.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4007.robot.subsystems.Gear;
 import org.usfirst.frc.team4007.robot.subsystems.Grimpeur;
@@ -25,6 +26,7 @@ public class Robot extends IterativeRobot {
 	public static Gear gear = new Gear();
 	public static Grimpeur grimpeur = new Grimpeur();
 	public static LanceBalle lanceBalle = new LanceBalle();
+	public static Camera cameraSubSystem = new Camera();
 	/* END TOUS LES SOUS SYSTEMS DOIVENT ETRE DECLARER ICI */
 	
 	

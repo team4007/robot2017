@@ -32,6 +32,9 @@ public class Debug extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+    	System.out.println("switchs switch0: " + Robot.autonomousCommands.switch0.get());
+    	System.out.println("switchs switch1: " + Robot.autonomousCommands.switch1.get());
+    	System.out.println("switchs config: " + Robot.autonomousCommands.config());
         return !Robot.oi.btnDebug.get();
     }
 

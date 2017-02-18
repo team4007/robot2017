@@ -28,6 +28,8 @@ public class Robot extends IterativeRobot {
 	public static Grimpeur grimpeur = new Grimpeur();
 	public static LanceBalle lanceBalle = new LanceBalle();
 	public static Camera cameraSubSystem = new Camera();
+	public static AutonomousCommands autonomousCommands = new AutonomousCommands();
+	
 	/* END TOUS LES SOUS SYSTEMS DOIVENT ETRE DECLARER ICI */
 	
 	
@@ -76,9 +78,7 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-		autonomous = new AutonomousCommands();
-		autonomous.start();
-    	
+		autonomousCommands.start();	
     }
 
     /**

@@ -18,13 +18,13 @@ public class DriveWithJoystick extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	System.out.println("DRIVE DESACTIVE DANS DRIVEWITHJOYSTICK.JAVA");
+    	//System.out.println("DRIVE DESACTIVE DANS DRIVEWITHJOYSTICK.JAVA");
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	
-    	//Robot.driveTrain.drive(Robot.oi.joystickGauche, Robot.oi.joystickDroit);
+    	Robot.driveTrain.drive(Robot.oi.joystickGauche, Robot.oi.joystickDroit);
     }
 
     // Make this return true when this Command no longer needs to run execute()

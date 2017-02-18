@@ -41,4 +41,6 @@ public class RobotMap {
 	public static final int btnCameraDown = 9;
 	public static final int PWMcamera = 0;
 	
+	public static final boolean debugMode = true; 
+	
 }

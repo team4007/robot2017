@@ -8,6 +8,7 @@ import org.usfirst.frc.team4007.robot.RobotMap;
 import org.usfirst.frc.team4007.robot.commands.DriveWithJoystick;
 
 import com.ctre.CANTalon;
+import com.ctre.CANTalon.FeedbackDevice;
 
 /**
  *
@@ -29,6 +30,8 @@ public class DriveTrain extends Subsystem {
 
 		drive = new RobotDrive(roueGauche, roueDroite);
 		
+		roueGauche.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		roueGauche.configEncoderCodesPerRev(2048);
 
 	}
 	
@@ -55,6 +58,10 @@ public class DriveTrain extends Subsystem {
     
     public void drive(Joystick leftStick, Joystick rightStick) {
     	drive.tankDrive(leftStick, rightStick);
+    	
+    	if (RobotMap.debugMode) {
+    		System.out.println("Encodeur gauche" + roueGauche.getEncPosition());
+    	}
     	    	
     }
 }

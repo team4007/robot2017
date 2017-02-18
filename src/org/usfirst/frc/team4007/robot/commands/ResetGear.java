@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class FreeGear extends Command {
+public class ResetGear extends Command {
 
-    public FreeGear() {
+    public ResetGear() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.gear);
@@ -18,7 +18,7 @@ public class FreeGear extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	//System.out.println("timestamp init: " + Robot.gear.counter.readRisingTimestamp());
-    	Robot.gear.demarreOuvre();
+    	Robot.gear.demarreFerme();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -29,10 +29,8 @@ public class FreeGear extends Command {
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     	//System.out.println("timestamp is finish " + Robot.gear.counter.readRisingTimestamp());
-
-    	return !Robot.oi.btnGearRelease.get() || (Robot.gear.compteurPulse >= Robot.gear.max);
     		
-        
+        return Robot.gear.compteurPulse <= 0;
     }
 
     // Called once after isFinished returns true

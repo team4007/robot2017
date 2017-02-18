@@ -4,6 +4,7 @@ import org.usfirst.frc.team4007.robot.commands.CameraCommand;
 import org.usfirst.frc.team4007.robot.commands.Debug;
 import org.usfirst.frc.team4007.robot.commands.FreeGear;
 import org.usfirst.frc.team4007.robot.commands.Grimpe;
+import org.usfirst.frc.team4007.robot.commands.ResetGear;
 import org.usfirst.frc.team4007.robot.commands.StartBalleBrasseur;
 import org.usfirst.frc.team4007.robot.commands.StartBalleLanceur;
 import org.usfirst.frc.team4007.robot.subsystems.Camera;
@@ -68,6 +69,7 @@ public class OI {
 		btnLanceurDroit.whenPressed(new StartBalleLanceur());		
 		btnBrasseurGauche.whenPressed(new StartBalleBrasseur());
 		btnGearRelease.whenPressed(new FreeGear());
+		btnGearRelease.whenReleased(new ResetGear());
 		
 		btnCamUp = new JoystickButton(joystickGauche, RobotMap.btnCameraUp);
 		btnCamMid = new JoystickButton(joystickGauche, RobotMap.btnCameraMid);

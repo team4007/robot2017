@@ -97,7 +97,7 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
     	Scheduler.getInstance().run();
-        driveTrain.drive(Robot.oi.joystickGauche, Robot.oi.joystickDroit);
+        //driveTrain.drive(Robot.oi.joystickGauche, Robot.oi.joystickDroit);
         //System.out.println(Robot.oi.joystickDroit.getRawButton(RobotMap.btnGrimpeur));
     }
     

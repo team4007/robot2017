@@ -68,6 +68,7 @@ public class OI {
 		btnGrimpeur.whenPressed(new Grimpe());		
 		btnLanceurDroit.whenPressed(new StartBalleLanceur());		
 		btnBrasseurGauche.whenPressed(new StartBalleBrasseur());
+		
 		btnGearRelease.whenPressed(new FreeGear());
 		btnGearRelease.whenReleased(new ResetGear());
 		

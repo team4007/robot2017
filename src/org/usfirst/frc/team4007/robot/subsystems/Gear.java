@@ -15,7 +15,6 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Relay.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.hal.EncoderJNI;
 
 /**
  *
@@ -27,11 +26,12 @@ public class Gear extends Subsystem {
 
 	public Relay moteur;
 	public AnalogTrigger analogtrigger;
-	public AnalogTriggerOutput counter;
-	public int compteurPulse;
-	public boolean previousState;
+	public Counter compteur;
+	//public AnalogTriggerOutput counter;
+	public int compteurPulse,sens;
+	/*public boolean previousState;
 	public Value previousValue;
-	public int max;
+	public int max;*/
 	public Gear(){
 		super();
 		moteur = new Relay(RobotMap.spikeGear);
@@ -39,17 +39,20 @@ public class Gear extends Subsystem {
 		//niv haut : 4.21
 		//niv bas : 2.88
 		compteurPulse = 0;
-		max = 25;
+		sens = 1;
+		//max = 25;
 		analogtrigger.setLimitsVoltage(3.0, 4.0); 
-		counter = analogtrigger.createOutput(AnalogTriggerType.kFallingPulse);
+		//counter = analogtrigger.createOutput(AnalogTriggerType.kFallingPulse);
 		analogtrigger.setAveraged(true);
-		previousState = analogtrigger.getTriggerState();
-		previousValue = Value.kReverse;
+		compteur = new Counter(analogtrigger);
+		compteur.reset();
+		/*previousState = analogtrigger.getTriggerState();
+		previousValue = Value.kReverse;*/
 
 	}
 	
 	public void compterTour(){
-		boolean currentState = analogtrigger.getTriggerState();
+		/*boolean currentState = analogtrigger.getTriggerState();
 		Value currentValue = (Value.kReverse == moteur.get() || Value.kForward == moteur.get()) ? (moteur.get()) : previousValue;
 		if(currentState != previousState){
 			if(currentValue == Value.kForward){
@@ -59,8 +62,14 @@ public class Gear extends Subsystem {
 			}
 			previousState = currentState;
 			previousValue = currentValue;
-		}
+		}*/
+		updateCounter();
 		System.out.println(compteurPulse);
+	}
+	
+	public void updateCounter(){
+		compteurPulse = compteurPulse + (sens) * compteur.get();
+		compteur.reset();
 	}
 	
     public void initDefaultCommand() {
@@ -70,7 +79,9 @@ public class Gear extends Subsystem {
     
     public void demarreOuvre(){
     	//System.out.println("GRIMPEUR DEMARRE");
+    	updateCounter();
     	moteur.set(Value.kReverse);
+    	sens = -1;    	
     }
     
     public void arret(){
@@ -80,7 +91,9 @@ public class Gear extends Subsystem {
     
     public void demarreFerme(){
     	//System.out.println("GRIMPEUR DEMARRE");
+    	updateCounter();
     	moteur.set(Value.kForward);
+    	sens = 1;
     }
 }
 

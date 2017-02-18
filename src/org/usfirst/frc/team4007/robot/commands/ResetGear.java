@@ -30,7 +30,7 @@ public class ResetGear extends Command {
     protected boolean isFinished() {
     	//System.out.println("timestamp is finish " + Robot.gear.counter.readRisingTimestamp());
     		
-        return Robot.gear.compteurPulse <= 0;
+        return false/*Robot.gear.compteurPulse <= 0*/;
     }
 
     // Called once after isFinished returns true

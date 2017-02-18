@@ -30,7 +30,7 @@ public class FreeGear extends Command {
     protected boolean isFinished() {
     	//System.out.println("timestamp is finish " + Robot.gear.counter.readRisingTimestamp());
 
-    	return !Robot.oi.btnGearRelease.get() || (Robot.gear.compteurPulse >= Robot.gear.max);
+    	return !Robot.oi.btnGearRelease.get() /*|| (Robot.gear.compteurPulse >= Robot.gear.max)*/;
     		
         
     }

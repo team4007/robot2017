@@ -1,17 +1,10 @@
 package org.usfirst.frc.team4007.robot.subsystems;
 
-import java.time.format.ResolverStyle;
-
-import org.usfirst.frc.team4007.robot.Robot;
 import org.usfirst.frc.team4007.robot.RobotMap;
 
-import com.ctre.CANTalon;
-
 import edu.wpi.first.wpilibj.AnalogTrigger;
-import edu.wpi.first.wpilibj.AnalogTriggerOutput;
-import edu.wpi.first.wpilibj.AnalogTriggerOutput.AnalogTriggerType;
 import edu.wpi.first.wpilibj.Counter;
-import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Relay.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -27,6 +20,8 @@ public class Gear extends Subsystem {
 	public Relay moteur;
 	public AnalogTrigger analogtrigger;
 	public Counter compteur;
+	public DigitalInput limitSwitch;
+	
 	//public AnalogTriggerOutput counter;
 	public int compteurPulse,sens;
 	/*public boolean previousState;
@@ -36,6 +31,8 @@ public class Gear extends Subsystem {
 		super();
 		moteur = new Relay(RobotMap.spikeGear);
 		analogtrigger = new AnalogTrigger(RobotMap.analogGear);
+		limitSwitch = new DigitalInput(RobotMap.limitSwitchGear);
+		
 		//niv haut : 4.21
 		//niv bas : 2.88
 		compteurPulse = 0;

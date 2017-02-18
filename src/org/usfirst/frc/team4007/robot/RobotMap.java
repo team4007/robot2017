@@ -43,4 +43,6 @@ public class RobotMap {
 	
 	public static final boolean debugMode = true; 
 	
+	public static final int limitSwitchGear = 8;
+	
 }

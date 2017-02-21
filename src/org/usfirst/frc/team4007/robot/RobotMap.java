@@ -22,10 +22,10 @@ public class RobotMap {
 	public static final int canTalonRouesDroites = 0;
 	public static final int canTalonWinch = 1;
 	
-	public static final int spikeGear = 0;
-	public static final int analogGear = 3;
+	public static final int spikeGear = 2; // Relay
+	public static final int analogGear = 0; // Analogue
 
-	public static final int spikeLanceBalle = 1;
+	public static final int spikeLanceBalle = 3;// Relay
 	public static final int canTalonLanceBalle = 2;
 	
 	public static final int portJoystickGauche = 1;
@@ -39,10 +39,10 @@ public class RobotMap {
 	public static final int btnCameraUp = 11;
 	public static final int btnCameraMid = 10;
 	public static final int btnCameraDown = 9;
-	public static final int PWMcamera = 0;
+	public static final int PWMcamera = 0; // PWM
 	
 	public static final boolean debugMode = true; 
 	
-	public static final int limitSwitchGear = 8;
+	public static final int limitSwitchGear = 9; // DIO
 	
 }

@@ -18,20 +18,25 @@ public class Camera extends Subsystem {
 	
 	public Camera(){
 		moteur = new Servo(RobotMap.PWMcamera);
+		setUP();
 	 }
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }
     
+    public void setUP(){
+    	moteur.set(0);
+    }
+    
     public void position_up(){
-	moteur.setAngle(90);
-	 }
-    public void position_mid(){
-    	moteur.setAngle(45);    	
+    	if(moteur.getAngle() < 90)
+    		moteur.setAngle(moteur.getAngle() + 45);
+	
 	 }
     public void position_down(){
-    	moteur.setAngle(0);    	
+    	if(moteur.getAngle() > 0)
+    		moteur.setAngle(moteur.getAngle() - 45);   	
 	 }
 }
 

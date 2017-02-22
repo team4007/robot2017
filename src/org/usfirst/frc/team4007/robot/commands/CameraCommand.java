@@ -17,7 +17,7 @@ public class CameraCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.cameraSubSystem.position_up();
+    	//Robot.cameraSubSystem.setUP();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -25,8 +25,6 @@ public class CameraCommand extends Command {
     	if(Robot.oi.btnCamUp.get())
     	{
     		Robot.cameraSubSystem.position_up();
-    	}else if(Robot.oi.btnCamMid.get()){
-    		Robot.cameraSubSystem.position_mid();
     	}else if(Robot.oi.btnCamDown.get()){
     		Robot.cameraSubSystem.position_down();
     	}

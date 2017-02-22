@@ -17,7 +17,8 @@ public class ResetGear extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	//System.out.println("timestamp init: " + Robot.gear.counter.readRisingTimestamp());
+    	System.out.println("Amorce fermer");
+    	//Robot.gear.updateCounter();
     	Robot.gear.demarreFerme();
     }
 
@@ -28,9 +29,9 @@ public class ResetGear extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	//System.out.println("timestamp is finish " + Robot.gear.counter.readRisingTimestamp());
+    	System.out.println("Fin fermer" + Robot.gear.compteurPulse );
     		
-        return false/*Robot.gear.compteurPulse <= 0*/;
+        return Robot.gear.compteurPulse >= 0;
     }
 
     // Called once after isFinished returns true

@@ -70,11 +70,11 @@ public class OI {
 		btnGearRelease.whenReleased(new ResetGear());
 		
 		btnCamUp = new JoystickButton(joystickGauche, RobotMap.btnCameraUp);
-		btnCamMid = new JoystickButton(joystickGauche, RobotMap.btnCameraMid);
+		//btnCamMid = new JoystickButton(joystickGauche, RobotMap.btnCameraMid);
 		btnCamDown = new JoystickButton(joystickGauche, RobotMap.btnCameraDown);
 		
 		btnCamUp.whenPressed(new CameraCommand());
-		btnCamMid.whenPressed(new CameraCommand());
+		//btnCamMid.whenPressed(new CameraCommand());
 		btnCamDown.whenPressed(new CameraCommand());
 		
 		btnDebug = new JoystickButton(joystickDroit, 6);

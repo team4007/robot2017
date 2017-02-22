@@ -29,7 +29,7 @@ public class LanceBalle extends Subsystem {
     }
     
     public void startRotateBase(){
-    	alimenteur.set(Relay.Value.kForward);
+    	alimenteur.set(Relay.Value.kReverse);
     }
     public void stopRotateBase(){
     	alimenteur.set(Relay.Value.kOff);

@@ -51,7 +51,8 @@ public class Robot extends IterativeRobot {
     	 oi = new OI();
 
         /*cam.setFPS(30);
-        cam.setResolution(320, 240);*/      
+        cam.setResolution(320, 240);*/   
+    	
         CameraServer.getInstance().startAutomaticCapture();
     }
 	

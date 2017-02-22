@@ -60,6 +60,7 @@ public class Gear extends Subsystem {
 			previousState = currentState;
 			previousValue = currentValue;
 		}*/
+		
 		updateCounter();
 		System.out.println(compteurPulse);
 	}

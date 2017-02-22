@@ -36,12 +36,12 @@ public class RobotMap {
 	public static final int btnBrasseurLanceur = 1;
 	public static final int btnGear = 4;
 	
-	public static final int btnCameraUp = 11;
-	public static final int btnCameraMid = 10;
-	public static final int btnCameraDown = 9;
-	public static final int PWMcamera = 0; // PWM
+	public static final int btnCameraUp = 3;
+	//public static final int btnCameraMid = 10;
+	public static final int btnCameraDown = 2;
+	public static final int PWMcamera = 9; // PWM
 	
-	public static final boolean debugMode = true; 
+	public static final boolean debugMode = false; 
 	
 	public static final int limitSwitchGear = 9; // DIO
 	

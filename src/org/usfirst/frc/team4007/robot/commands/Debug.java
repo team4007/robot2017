@@ -23,7 +23,7 @@ public class Debug extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	try {
-        	System.out.println("Rising: "+Robot.gear.analogtrigger.getTriggerState());
+        	//System.out.println("Rising: "+Robot.gear.analogtrigger.getTriggerState());
         	//System.out.println("Falling: "+Robot.gear.counter.readFallingTimestamp());
         	 }catch(Exception e){
         		 System.out.println(e);
@@ -32,9 +32,19 @@ public class Debug extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+    	
+    	System.out.println("DEBUG BALLE");
+    	
+    	System.out.println("DEBUG AUTONOME");
     	System.out.println("switchs switch0: " + Robot.autonomousCommands.switch0.get());
     	System.out.println("switchs switch1: " + Robot.autonomousCommands.switch1.get());
     	System.out.println("switchs config: " + Robot.autonomousCommands.config());
+    	
+    	System.out.println("DEBUG GEAR");
+    	System.out.println("Limit Switch GEAR:" + Robot.gear.limitSwitch.get() );
+    	System.out.println("Bosch GEAR value:" + Robot.gear.compteur.get() );
+    	System.out.println("DEBUG CAMERA");
+    	System.out.println("Servo camera:" + Robot.cameraSubSystem.moteur.getAngle() );
         return !Robot.oi.btnDebug.get();
     }
 

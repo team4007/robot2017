@@ -1,11 +1,19 @@
 
 package org.usfirst.frc.team4007.robot;
 
+import edu.wpi.cscore.CvSink;
+import edu.wpi.cscore.CvSource;
+import edu.wpi.cscore.MjpegServer;
+import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
+import org.opencv.core.CvType;
+import org.opencv.core.Mat;
+import org.opencv.imgproc.Imgproc;
 import org.usfirst.frc.team4007.robot.commands.AutonomousCommands;
 import org.usfirst.frc.team4007.robot.subsystems.Camera;
 import org.usfirst.frc.team4007.robot.subsystems.DriveTrain;
@@ -28,7 +36,7 @@ public class Robot extends IterativeRobot {
 	public static Grimpeur grimpeur = new Grimpeur();
 	public static LanceBalle lanceBalle = new LanceBalle();
 	public static Camera cameraSubSystem = new Camera();
-	public static AutonomousCommands autonomousCommands = new AutonomousCommands();
+	public static AutonomousCommands autonomousCommands;
 	
 	/* END TOUS LES SOUS SYSTEMS DOIVENT ETRE DECLARER ICI */
 	
@@ -36,12 +44,11 @@ public class Robot extends IterativeRobot {
 
 	public static OI oi;
 	
-	
-	AutonomousCommands autonomous;
-
-	//CameraServer camServer = CameraServer.getInstance();
+	// Interessant : Selecteur de configuration logiciel
+	// Source : https://github.com/iron-claw-972/FRC2016/blob/master/src/org/usfirst/frc/team972/robot/Autonomous.java
     
-    //UsbCamera cam = CameraServer.getInstance().startAutomaticCapture("cam0", 0);
+    // Source : https://www.chiefdelphi.com/forums/showthread.php?t=143688&page=2&highlight=vision
+    //MjpegServer server = new MjpegServer("Output to dashboard", 5800);
     
     /**
      * This function is run when the robot is first started up and should be
@@ -49,11 +56,8 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
     	 oi = new OI();
-
-        /*cam.setFPS(30);
-        cam.setResolution(320, 240);*/   
-    	
-        CameraServer.getInstance().startAutomaticCapture();
+    	 
+    	 initCamera();
     }
 	
 	/**
@@ -66,6 +70,7 @@ public class Robot extends IterativeRobot {
     }
 	
 	public void disabledPeriodic() {
+		
 		Scheduler.getInstance().run();
 	}
 
@@ -79,6 +84,7 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
+    	autonomousCommands = new AutonomousCommands();
 		autonomousCommands.start();	
     }
 
@@ -87,11 +93,14 @@ public class Robot extends IterativeRobot {
      */
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
+        
     }
 
     public void teleopInit() {
-    	if (autonomous != null) autonomous.cancel();
+    	if (autonomousCommands != null) autonomousCommands.cancel();
     	
+    	driveTrain.enableMotors();
+    	//driveTrain.setControlModeToSpeed();
     }
 
     /**
@@ -108,5 +117,40 @@ public class Robot extends IterativeRobot {
      */
     public void testPeriodic() {
         LiveWindow.run();
+    }
+    
+    // Source : https://www.chiefdelphi.com/forums/showpost.php?p=1653356&postcount=17
+    private void initCamera() {
+  
+    	
+        Thread t = new Thread(() -> {
+
+            
+            UsbCamera cam = CameraServer.getInstance().startAutomaticCapture("cam0", 0);
+            cam.setFPS(15);
+            cam.setResolution(320, 240); 
+            
+            CvSink sink1 = CameraServer.getInstance().getVideo(cam);
+            sink1.setEnabled(true);
+            
+            GripPipeline grip = new GripPipeline();
+            
+            CvSource outputStream = CameraServer.getInstance().putVideo("Video", 320, 240);
+            
+            Mat source = new Mat();
+            Mat output = new Mat();
+            
+            while (!Thread.interrupted()) {
+            	
+            	sink1.grabFrame(source);
+            	/* Test */
+            	//grip.process(source, output);
+            	Imgproc.cvtColor(source, output, Imgproc.COLOR_BGR2GRAY);
+            	
+            	outputStream.putFrame(output);
+            }
+        });
+        
+        t.start();
     }
 }

@@ -29,7 +29,7 @@ public class RobotMap {
 	public static final int canTalonLanceBalle = 2;
 	
 	public static final int portJoystickGauche = 1;
-	public static final int portJoystickDroit = 2;
+	public static final int portJoystickDroit = 0;
 	
 	public static final int btnGrimpeur = 3;
 	public static final int btnLanceur = 1;
@@ -44,5 +44,6 @@ public class RobotMap {
 	public static final boolean debugMode = false; 
 	
 	public static final int limitSwitchGear = 9; // DIO
+	public static final int encodeurRoueClics = 2048;
 	
 }

@@ -38,7 +38,7 @@ public class Debug extends Command {
     	System.out.println("DEBUG AUTONOME");
     	System.out.println("switchs switch0: " + Robot.autonomousCommands.switch0.get());
     	System.out.println("switchs switch1: " + Robot.autonomousCommands.switch1.get());
-    	System.out.println("switchs config: " + Robot.autonomousCommands.config());
+    	//System.out.println("switchs config: " + Robot.autonomousCommands.config());
     	
     	System.out.println("DEBUG GEAR");
     	System.out.println("Limit Switch GEAR:" + Robot.gear.limitSwitch.get() );

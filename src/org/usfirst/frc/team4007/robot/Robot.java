@@ -10,9 +10,14 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.vision.VisionThread;
+
+import java.util.ArrayList;
 
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
+import org.opencv.core.MatOfPoint;
+import org.opencv.core.Rect;
 import org.opencv.imgproc.Imgproc;
 import org.usfirst.frc.team4007.robot.commands.AutonomousCommands;
 import org.usfirst.frc.team4007.robot.subsystems.Camera;
@@ -44,18 +49,29 @@ public class Robot extends IterativeRobot {
 
 	public static OI oi;
 	
+	
+	
 	// Interessant : Selecteur de configuration logiciel
 	// Source : https://github.com/iron-claw-972/FRC2016/blob/master/src/org/usfirst/frc/team972/robot/Autonomous.java
     
     // Source : https://www.chiefdelphi.com/forums/showthread.php?t=143688&page=2&highlight=vision
     //MjpegServer server = new MjpegServer("Output to dashboard", 5800);
-    
+	private static final int IMG_WIDTH = 320;
+	private static final int IMG_HEIGHT = 240;
+	
+	private VisionThread visionThread;
+	private double centerX = 0.0;
+	
+	private final Object imgLock = new Object();
+	
+	
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
     public void robotInit() {
     	 oi = new OI();
+    	 
     	 
     	 initCamera();
     }
@@ -121,36 +137,61 @@ public class Robot extends IterativeRobot {
     
     // Source : https://www.chiefdelphi.com/forums/showpost.php?p=1653356&postcount=17
     private void initCamera() {
-  
     	
-        Thread t = new Thread(() -> {
+    	UsbCamera camera = CameraServer.getInstance().startAutomaticCapture("cam0", 0);
+	    camera.setFPS(15);
+	    camera.setResolution(320, 240);
 
-            
-            UsbCamera cam = CameraServer.getInstance().startAutomaticCapture("cam0", 0);
-            cam.setFPS(15);
-            cam.setResolution(320, 240); 
-            
-            CvSink sink1 = CameraServer.getInstance().getVideo(cam);
-            sink1.setEnabled(true);
-            
-            GripPipeline grip = new GripPipeline();
-            
-            CvSource outputStream = CameraServer.getInstance().putVideo("Video", 320, 240);
-            
-            Mat source = new Mat();
-            Mat output = new Mat();
-            
-            while (!Thread.interrupted()) {
-            	
-            	sink1.grabFrame(source);
-            	/* Test */
-            	//grip.process(source, output);
-            	Imgproc.cvtColor(source, output, Imgproc.COLOR_BGR2GRAY);
-            	
-            	outputStream.putFrame(output);
-            }
-        });
-        
-        t.start();
+	    
+	    visionThread = new VisionThread(camera, new GripPipeline(), pipeline -> {
+	    	
+	        if (!pipeline.convexHullsOutput().isEmpty()) {
+	        	ArrayList<MatOfPoint> contours = pipeline.convexHullsOutput();
+	        	
+	        	MatOfPoint points = new MatOfPoint();
+	        	
+	        	for (MatOfPoint pts : contours) {
+	        		points.push_back(pts);
+	        	}
+	        	
+	        	
+	            Rect r = Imgproc.boundingRect(points);
+	            synchronized (imgLock) {
+	                centerX = r.x + (r.width / 2);
+	            }
+	            
+	            points.release();
+	        }
+	    });
+	    
+	    visionThread.start();
+//        Thread t = new Thread(() -> {
+//
+//            
+//            UsbCamera cam = CameraServer.getInstance().startAutomaticCapture("cam0", 0);
+
+//            
+//            CvSink sink1 = CameraServer.getInstance().getVideo(cam);
+//            sink1.setEnabled(true);
+//            
+//            GripPipeline grip = new GripPipeline();
+//            
+//            CvSource outputStream = CameraServer.getInstance().putVideo("Video", 320, 240);
+//            
+//            Mat source = new Mat();
+//            Mat output = new Mat();
+//            
+//            while (!Thread.interrupted()) {
+//            	
+//            	sink1.grabFrame(source);
+//            	/* Test */
+//            	//grip.process(source, output);
+//            	Imgproc.cvtColor(source, output, Imgproc.COLOR_BGR2GRAY);
+//            	
+//            	outputStream.putFrame(output);
+//            }
+//        });
+//        
+//        t.start();
     }
 }

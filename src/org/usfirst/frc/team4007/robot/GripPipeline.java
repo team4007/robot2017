@@ -5,6 +5,8 @@ import java.util.List;
 import org.opencv.core.*;
 import org.opencv.imgproc.*;
 
+import edu.wpi.first.wpilibj.vision.VisionPipeline;
+
 /**
 * GripPipeline class.
 *
@@ -12,7 +14,7 @@ import org.opencv.imgproc.*;
 *
 * @author GRIP
 */
-public class GripPipeline {
+public class GripPipeline implements VisionPipeline{
 
 	//Outputs
 	private Mat resizeImageOutput = new Mat();
@@ -32,7 +34,7 @@ public class GripPipeline {
 	/**
 	 * This is the primary method that runs the entire pipeline and updates the outputs.
 	 */
-	public void process(Mat source0, Mat destination) {
+	public void process(Mat source0) {
 
 		/*Trouble de memoire*/ 
 //		if (destination != null) {
@@ -101,8 +103,6 @@ public class GripPipeline {
 		convexHulls(convexHullsContours, convexHullsOutput);
 
 
-		Imgproc.drawContours(destination, convexHullsOutput, 1, new Scalar (255, 0, 0));
-		
 	}
 
 	/**
@@ -332,6 +332,7 @@ public class GripPipeline {
 			outputContours.add(mopHull);
 		}
 	}
+
 
 
 

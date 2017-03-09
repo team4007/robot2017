@@ -40,7 +40,8 @@ public class DriveTrain extends Subsystem {
 		roueGauche.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		roueGauche.configEncoderCodesPerRev(RobotMap.encodeurRoueClics);
 		roueGauche.enableBrakeMode(false);
-		roueGauche.reverseOutput(true);
+		
+		//roueGauche.reverseOutput(true);
 
 	}
 	

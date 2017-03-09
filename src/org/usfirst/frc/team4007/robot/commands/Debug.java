@@ -12,7 +12,9 @@ public class Debug extends Command {
     public Debug() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.gear);
+    	//requires(Robot.gear);
+    	//requires(Robot.driveTrain);
+    	
     }
 
     // Called just before this Command runs the first time
@@ -33,18 +35,23 @@ public class Debug extends Command {
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     	
-    	System.out.println("DEBUG BALLE");
+    	//System.out.println("DEBUG BALLE");
     	
-    	System.out.println("DEBUG AUTONOME");
-    	System.out.println("switchs switch0: " + Robot.autonomousCommands.switch0.get());
-    	System.out.println("switchs switch1: " + Robot.autonomousCommands.switch1.get());
+    	//System.out.println("DEBUG AUTONOME");
+    	
+    	//System.out.println("switchs switch0: " + Robot.autonomousCommands.switch0.get());
+    	//System.out.println("switchs switch1: " + Robot.autonomousCommands.switch1.get());
     	//System.out.println("switchs config: " + Robot.autonomousCommands.config());
     	
-    	System.out.println("DEBUG GEAR");
-    	System.out.println("Limit Switch GEAR:" + Robot.gear.limitSwitch.get() );
-    	System.out.println("Bosch GEAR value:" + Robot.gear.compteur.get() );
-    	System.out.println("DEBUG CAMERA");
-    	System.out.println("Servo camera:" + Robot.cameraSubSystem.moteur.getAngle() );
+    	//System.out.println("DEBUG GEAR");
+    	//System.out.println("Limit Switch GEAR:" + Robot.gear.limitSwitch.get() );
+    	//System.out.println("Bosch GEAR value:" + Robot.gear.compteur.get() );
+    	//System.out.println("DEBUG CAMERA");
+    	//System.out.println("Servo camera:" + Robot.cameraSubSystem.moteur.getAngle() );
+    	
+    	System.out.println("Roue droite: "+Robot.driveTrain.roueDroite.getPosition());
+    	System.out.println("Roue droite speed: "+Robot.driveTrain.roueDroite.getSpeed());
+    	
         return !Robot.oi.btnDebug.get();
     }
 

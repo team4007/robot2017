@@ -1,5 +1,7 @@
 package org.usfirst.frc.team4007.robot.commands;
 
+import org.usfirst.frc.team4007.robot.RobotMap;
+
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -8,21 +10,51 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class AutonomousCommands extends CommandGroup {
+
 	DigitalInput switch0;
 	DigitalInput switch1;
 	DigitalInput switch2;
-	//int config = 0;
 
-/*	public int config(){
-		int switch0Value = switch0.get() ? 0 : 1;
-		int switch1Value = switch1.get() ? 0 : 1;
-		//return switch0Value + switch1Value;
-		return 54;
-	}*/
+	public int config(){
+		if(switch0.get()) 
+			return 1;
+		
+		if(switch1.get()) 
+			return 2;
+		
+		if(switch2.get()) 
+			return 3;
+		
+		return 32 ;
+	}
 
 	public  AutonomousCommands() {
+		switch0 = new DigitalInput(RobotMap.AutoLimit0);
+		switch1 = new DigitalInput(RobotMap.AutoLimit1);
+		switch2 = new DigitalInput(RobotMap.AutoLimit2);
+		
+		addSequential(new Forward());		
 
-		addSequential(new Forward());
+		
+		//addSequential(new MakeTurn(MakeTurn.TurnSide.LEFT));
+		
+		
+		//addSequential(new Forward());
+		
+		//addSequential(new MakeTurn(MakeTurn.TurnSide.RIGHT));
+		
+		switch(config()){
+		case 1:
+		
+		case 2:
+			
+		case 3:
+			
+		default:
+			
+		}
+		
+		
 		/*
 		// SASSURER QUE TOUTES LES SWITCH AUTONOMES SONT PLUGGER
 		switch0 = new DigitalInput(0);

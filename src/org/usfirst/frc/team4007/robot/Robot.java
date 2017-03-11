@@ -1,10 +1,13 @@
 
 package org.usfirst.frc.team4007.robot;
 
+import edu.wpi.cscore.CameraServerJNI;
 import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
 import edu.wpi.cscore.MjpegServer;
 import edu.wpi.cscore.UsbCamera;
+import edu.wpi.cscore.UsbCameraInfo;
+import edu.wpi.cscore.VideoSink;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Timer;
@@ -71,9 +74,8 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
     	 oi = new OI();
-    	 
-    	 
-    	// initCamera();
+    	    	 
+    	 initCamera();
     }
 	
 	/**
@@ -139,34 +141,70 @@ public class Robot extends IterativeRobot {
     
     // Source : https://www.chiefdelphi.com/forums/showpost.php?p=1653356&postcount=17
     private void initCamera() {
+    	UsbCamera cameraFront = CameraServer.getInstance().startAutomaticCapture(0);
     	
-    	UsbCamera camera = CameraServer.getInstance().startAutomaticCapture("cam0", 0);
-	    camera.setFPS(15);
-	    camera.setResolution(320, 240);
-
-	    
-	    visionThread = new VisionThread(camera, new GripPipeline(), pipeline -> {
-	    	
-	        if (!pipeline.convexHullsOutput().isEmpty()) {
-	        	ArrayList<MatOfPoint> contours = pipeline.convexHullsOutput();
-	        	
-	        	MatOfPoint points = new MatOfPoint();
-	        	
-	        	for (MatOfPoint pts : contours) {
-	        		points.push_back(pts);
-	        	}
-	        	
-	        	
-	            Rect r = Imgproc.boundingRect(points);
-	            synchronized (imgLock) {
-	                centerX = r.x + (r.width / 2);
-	            }
-	            
-	            points.release();
-	        }
-	    });
-	    
-	    visionThread.start();
+    	 // src : https://www.chiefdelphi.com/forums/showpost.php?p=1639830&postcount=12
+//    	Thread t = new Thread(() -> {
+//    		
+//    		boolean allowCam1 = false;
+//    		
+//    		UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture(0);
+//            camera1.setResolution(320, 240);
+//            camera1.setFPS(15);
+//            UsbCamera camera2 = CameraServer.getInstance().startAutomaticCapture(1);
+//            camera2.setResolution(320, 240);
+//            camera2.setFPS(15);
+//            
+//            CvSink cvSink1 = CameraServer.getInstance().getVideo(camera1);
+//            CvSink cvSink2 = CameraServer.getInstance().getVideo(camera2);
+//            
+//            CvSource outputStream = CameraServer.getInstance().putVideo("cam0", 320, 240);
+//            
+//            Mat image = new Mat();
+//            
+//            while(!Thread.interrupted()) {
+//            	
+//            	if(oi.joystickGauche.getRawButton(9)) {
+//            		allowCam1 = !allowCam1;
+//            	}
+//            	
+//                if(allowCam1){
+//                  cvSink2.setEnabled(false);
+//                  cvSink1.setEnabled(true);
+//                  cvSink1.grabFrame(image);
+//                } else{
+//                  cvSink1.setEnabled(false);
+//                  cvSink2.setEnabled(true);
+//                  cvSink2.grabFrame(image);     
+//                }
+//                
+//                outputStream.putFrame(image);
+//            }
+//            
+//        });
+//        t.start();
+//	    visionThread = new VisionThread(cameraAvant, new GripPipeline(), pipeline -> {
+//	    	
+//	        if (!pipeline.convexHullsOutput().isEmpty()) {
+//	        	ArrayList<MatOfPoint> contours = pipeline.convexHullsOutput();
+//	        	
+//	        	MatOfPoint points = new MatOfPoint();
+//	        	
+//	        	for (MatOfPoint pts : contours) {
+//	        		points.push_back(pts);
+//	        	}
+//	        	
+//	        	
+//	            Rect r = Imgproc.boundingRect(points);
+//	            synchronized (imgLock) {
+//	                centerX = r.x + (r.width / 2);
+//	            }
+//	            
+//	            points.release();
+//	        }
+//	    });
+//	    
+//	    visionThread.start();
 //        Thread t = new Thread(() -> {
 //
 //            

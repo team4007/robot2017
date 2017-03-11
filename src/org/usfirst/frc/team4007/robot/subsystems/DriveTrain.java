@@ -43,9 +43,19 @@ public class DriveTrain extends Subsystem {
 		roueDroite.configEncoderCodesPerRev(RobotMap.encodeurRoueClics); // Config du AMT103 0b0000
 		roueDroite.enableBrakeMode(false);
 		
+//		roueDroite.configNominalOutputVoltage(0f, 0f);
+//		roueDroite.configPeakOutputVoltage(12.0f, -12.0f);
+//		roueDroite.setAllowableClosedLoopErr(0);
+//		roueDroite.setProfile(0);
+//		roueDroite.setF(0.0);
+//		roueDroite.setP(0.1);
+//		roueDroite.setI(0.0); 
+//		roueDroite.setD(0.0); 
+		
 		roueGauche.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		roueGauche.configEncoderCodesPerRev(RobotMap.encodeurRoueClics);
 		roueGauche.enableBrakeMode(false);
+		
 		
 		//roueGauche.reverseOutput(true);
 	}
@@ -123,6 +133,14 @@ public class DriveTrain extends Subsystem {
 	
 	public double getPositionFromDistanceToTravel(double distance){
 		return distance / circonferenceRoues;
+	}
+	
+	public void reset(){
+		roueGauche.setEncPosition(0);
+		roueDroite.setEncPosition(0);
+		
+		roueGauche.setPosition(0);
+		roueDroite.setPosition(0);
 	}
 }
 

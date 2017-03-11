@@ -56,22 +56,38 @@ public class AutoDrive extends Command {
     	requires (Robot.driveTrain);
     	dt = Robot.driveTrain;
     	
-    	dt.roueGauche.setVoltageRampRate(rampRate);
-    	dt.roueDroite.setVoltageRampRate(rampRate);
+//    	dt.roueGauche.setVoltageRampRate(rampRate);
+//    	dt.roueDroite.setVoltageRampRate(rampRate);
+//    	
+//    	dt.roueDroite.changeControlMode(TalonControlMode.PercentVbus);
+//
+//    	dt.roueGauche.changeControlMode(TalonControlMode.Follower);
+//    	dt.roueGauche.set(dt.roueDroite.getDeviceID());
+    	
+    	dt.reset();
     	
     }
     
 	// Called just before this Command runs the first time
     protected void initialize() {
+    	dt.roueDroite.changeControlMode(TalonControlMode.Position);
+    	dt.roueDroite.set(rightGoal);
+
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	  	
     }
+    
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+    	double currentError = dt.roueDroite.getError();
+    	
+    	System.out.println("Erreur : " + currentError);
+        //return dt.roueDroite.getPosition() > rightGoal;
+    	return false;
     }
 
     // Called once after isFinished returns true
@@ -84,7 +100,7 @@ public class AutoDrive extends Command {
     }
     
     /**
-     * Permet au robot de pivoter à l'angle indique
+     * Permet au robot de pivoter a l'angle indique
      * @param angle Angle en radian. Si angle < 0 anti-horaire
      */
     public void rotate (double angle) {

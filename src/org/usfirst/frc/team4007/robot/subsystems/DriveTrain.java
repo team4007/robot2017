@@ -30,6 +30,7 @@ public class DriveTrain extends Subsystem {
 	private double distanceCentreRoues = 25; // cm
 	private double diametreRoues = 15.24;
 	private double positionInDistance = 47.87787204070844895417068516118;
+	private double circonferenceRoues = 47.87787;
 	
 	public DriveTrain() {
 		super();
@@ -117,6 +118,11 @@ public class DriveTrain extends Subsystem {
 	public void setDiametreRoues(double diametreRoues) {
 		this.diametreRoues = diametreRoues;
 		this.positionInDistance = diametreRoues * Math.PI;
+		circonferenceRoues = diametreRoues * Math.PI;
+	}
+	
+	public double getPositionFromDistanceToTravel(double distance){
+		return distance / circonferenceRoues;
 	}
 }
 

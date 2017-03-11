@@ -24,7 +24,12 @@ public class DriveTrain extends Subsystem {
 	public CANTalon roueDroite;
 	public RobotDrive drive;
 	
-	
+	/**
+	 * Distance entre le centre la roue du centre
+	 */
+	private double distanceCentreRoues = 25; // cm
+	private double diametreRoues = 15.24;
+	private double positionInDistance = 47.87787204070844895417068516118;
 	
 	public DriveTrain() {
 		super();
@@ -42,7 +47,6 @@ public class DriveTrain extends Subsystem {
 		roueGauche.enableBrakeMode(false);
 		
 		//roueGauche.reverseOutput(true);
-
 	}
 	
 	public CANTalon getRoue(int numero){
@@ -95,6 +99,25 @@ public class DriveTrain extends Subsystem {
     	roueGauche.set(RobotMap.canTalonRouesDroites);
     	
     }
+    
+
+
+	public double getDistanceCentreRoues() {
+		return distanceCentreRoues;
+	}
+
+	public void setDistanceCentreRoues(double distanceCentreRoues) {
+		this.distanceCentreRoues = distanceCentreRoues;
+	}
+
+	public double getDiametreRoues() {
+		return diametreRoues;
+	}
+
+	public void setDiametreRoues(double diametreRoues) {
+		this.diametreRoues = diametreRoues;
+		this.positionInDistance = diametreRoues * Math.PI;
+	}
 }
 
 

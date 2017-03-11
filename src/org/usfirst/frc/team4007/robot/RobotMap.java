@@ -46,4 +46,8 @@ public class RobotMap {
 	public static final int limitSwitchGear = 9; // DIO
 	public static final int encodeurRoueClics = 2048;
 	
+	// Autonomous switch DIO
+	public static final int AutoLimit0 = 0; // DIO
+	public static final int AutoLimit1 = 1; // DIO
+	public static final int AutoLimit2 = 2; // DIO
 }

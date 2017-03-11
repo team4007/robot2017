@@ -6,12 +6,16 @@ import com.ctre.CANTalon;
 import com.ctre.CANTalon.TalonControlMode;
 
 public class Conducteur {
+	private double objectif_seuil = 0.00;
 	private double objectif_gauche = 0.0;
 	private double objectif_droite = 0.0;
 	private double vitesse_droite = 0.0;
 	private double vitesse_gauche = 0.0;
 	private double begin_slow_at = 1.5; // Valeur par defaut
 	private DriveTrain localDriveTrain;
+	
+	private int printLoop = 0;
+	
 
 	// Constructeur pour effectuer un virage
 	public Conducteur(DriveTrain dt, double objectif_gauche, double objectif_droite){
@@ -73,7 +77,7 @@ public class Conducteur {
 	public void execute(){
 		// GESTION DE LA ROUE DE DROITE
 		double objectif_droite_comming = Math.abs(objectif_droite) - Math.abs(this.localDriveTrain.roueDroite.getPosition());
-		boolean obj_droite_atteint = objectif_droite_comming <= 0 ; // Toujours calculer l'objectif en positif
+		boolean obj_droite_atteint = objectif_droite_comming <= objectif_seuil; // Toujours calculer l'objectif en positif
 
 
 				
@@ -81,13 +85,14 @@ public class Conducteur {
 
 			// GESTION DE LA ROUE DE GAUCHE
 		double objectif_gauche_comming = Math.abs(objectif_gauche) - Math.abs(this.localDriveTrain.roueGauche.getPosition());
-		boolean obj_gauche_atteint = objectif_gauche_comming <= 0 ; // Toujours calculer l'objectif en positif
+		boolean obj_gauche_atteint = objectif_gauche_comming <= objectif_seuil ; // Toujours calculer l'objectif en positif
 
 
 		
 		
 		
 		if(!obj_droite_atteint){
+			
 			if(objectif_droite_comming >= begin_slow_at)// Si jaccellere
 			{
 				if(vitesse_droite < vitesse_plus_limite) 
@@ -108,7 +113,8 @@ public class Conducteur {
 			vitesse_droite = 0;
 			this.localDriveTrain.roueDroite.enableBrakeMode(true);
 		}
-		System.out.print("VD : "+vitesse_droite);
+		
+		
 		
 		if(!obj_gauche_atteint){
 			
@@ -131,7 +137,14 @@ public class Conducteur {
 			vitesse_gauche = 0;
 			this.localDriveTrain.roueGauche.enableBrakeMode(true);
 		}
-		System.out.println(" *-*-*-*-*-*-* VG : "+vitesse_gauche);
+		
+		
+		if (printLoop++ > 10) {
+			printLoop = 0;
+			
+			System.out.print("VD : "+vitesse_droite);
+			System.out.println(" *-*-*-*-*-*-* VG : "+vitesse_gauche);
+		}
 	}
 	/*
 	 * roue gauche = 500
@@ -140,6 +153,7 @@ public class Conducteur {
 	private double convertSpeedToVoltValue(CANTalon roue, int precision){
 		return (Math.abs(roue.getSpeed())+0.01)/precision;
 	}
+	
 	private boolean objectif_atteind(CANTalon roue, double objectif){
 		return Math.abs(roue.getPosition()) >= Math.abs(objectif);
 	}
@@ -157,23 +171,7 @@ public class Conducteur {
 		}else{
 			roue.set(0); // STOP!
 		}
-			
-			/*
-		System.out.println("VITESSE ROUE::: "+vitesse_roue);
-		if(!obj_atteint){
-			if (objectif - Math.abs(roue.getPosition()) < begin_slow_at) {
-				vitesse_roue -= vitesse_moins;
-	    		
-	    		if (vitesse_roue < vitesse_moins_limite) {
-	    			vitesse_roue = vitesse_moins_limite;
-	    		}
-	    	} else {
-	    		vitesse_roue += vitesse_plus;
-	    	}
-			roue.set(vitesse_roue);
-		}else
-			roue.set(0);
-		*/
+		
 		
 	}
 	
@@ -185,6 +183,8 @@ public class Conducteur {
 		localDriveTrain.roueGauche.setEncPosition(0);
 		localDriveTrain.roueGauche.setPosition(0);
     	this.vitesse_gauche = 0;
+    	
+    	printLoop = 0;
     }
 	
 	public void end(){
@@ -199,19 +199,6 @@ public class Conducteur {
 		reset();
 	}
 	public boolean isFinish(){
-		//if(localDriveTrain.roueGauche.getControlMode() == TalonControlMode.Follower)
-			return objectif_atteind(localDriveTrain.roueDroite, objectif_droite) && objectif_atteind(localDriveTrain.roueGauche, objectif_gauche);
-		/*else
-			if(objectif_droite >= 0 && objectif_gauche >= 0)
-				return -localDriveTrain.roueDroite.getPosition()>= objectif_droite && -localDriveTrain.roueGauche.getPosition()>= objectif_gauche;
-				else
-					if(objectif_droite <= 0 && objectif_gauche <= 0)
-						return localDriveTrain.roueDroite.getPosition()>= objectif_droite && localDriveTrain.roueGauche.getPosition()>= objectif_gauche;
-						else
-							if(objectif_droite <= 0)
-								return localDriveTrain.roueDroite.getPosition()>= objectif_droite && -localDriveTrain.roueGauche.getPosition()>= objectif_gauche;
-								else
-									return -localDriveTrain.roueDroite.getPosition()>= objectif_droite && localDriveTrain.roueGauche.getPosition()>= objectif_gauche;
-				*/
+		return objectif_atteind(localDriveTrain.roueDroite, objectif_droite) && objectif_atteind(localDriveTrain.roueGauche, objectif_gauche);
 	}
 }

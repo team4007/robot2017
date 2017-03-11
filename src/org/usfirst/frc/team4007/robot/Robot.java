@@ -73,7 +73,7 @@ public class Robot extends IterativeRobot {
     	 oi = new OI();
     	 
     	 
-    	 initCamera();
+    	// initCamera();
     }
 	
 	/**
@@ -101,7 +101,9 @@ public class Robot extends IterativeRobot {
 	 */
     public void autonomousInit() {
     	autonomousCommands = new AutonomousCommands();
-		autonomousCommands.start();	
+		autonomousCommands.start();
+		
+		System.out.println(Thread.currentThread().getStackTrace()[0].getMethodName());
     }
 
     /**

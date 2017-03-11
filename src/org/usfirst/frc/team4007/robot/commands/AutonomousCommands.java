@@ -29,19 +29,20 @@ public class AutonomousCommands extends CommandGroup {
 	}
 
 	public  AutonomousCommands() {
-		switch0 = new DigitalInput(RobotMap.AutoLimit0);
-		switch1 = new DigitalInput(RobotMap.AutoLimit1);
-		switch2 = new DigitalInput(RobotMap.AutoLimit2);
 		
-		addSequential(new Forward());		
-
+		addSequential ( new AutoDrive (4.37));
+		
+		//addSequential(new Forward());		
 		
 		//addSequential(new MakeTurn(MakeTurn.TurnSide.LEFT));
-		
 		
 		//addSequential(new Forward());
 		
 		//addSequential(new MakeTurn(MakeTurn.TurnSide.RIGHT));
+		
+		switch0 = new DigitalInput(RobotMap.AutoLimit0);
+		switch1 = new DigitalInput(RobotMap.AutoLimit1);
+		switch2 = new DigitalInput(RobotMap.AutoLimit2);
 		
 		switch(config()){
 		case 1:

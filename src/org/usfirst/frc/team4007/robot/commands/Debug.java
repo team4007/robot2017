@@ -19,6 +19,7 @@ public class Debug extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	System.out.println("***** START DEBUG *****");
     	
     }
 
@@ -53,10 +54,12 @@ public class Debug extends Command {
     	System.out.println("Roue droite speed: "+Robot.driveTrain.roueDroite.getSpeed());
     	
         return !Robot.oi.btnDebug.get();
+    	//return isTimedOut();
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	System.out.println("***** END DEBUG *****");
     }
 
     // Called when another command which requires one or more of the same

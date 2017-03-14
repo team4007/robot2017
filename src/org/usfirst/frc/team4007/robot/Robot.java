@@ -1,27 +1,13 @@
 
 package org.usfirst.frc.team4007.robot;
 
-import edu.wpi.cscore.CameraServerJNI;
-import edu.wpi.cscore.CvSink;
-import edu.wpi.cscore.CvSource;
-import edu.wpi.cscore.MjpegServer;
 import edu.wpi.cscore.UsbCamera;
-import edu.wpi.cscore.UsbCameraInfo;
-import edu.wpi.cscore.VideoSink;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.vision.VisionThread;
 
-import java.util.ArrayList;
-
-import org.opencv.core.CvType;
-import org.opencv.core.Mat;
-import org.opencv.core.MatOfPoint;
-import org.opencv.core.Rect;
-import org.opencv.imgproc.Imgproc;
 import org.usfirst.frc.team4007.robot.commands.AutonomousCommands;
 import org.usfirst.frc.team4007.robot.subsystems.Camera;
 import org.usfirst.frc.team4007.robot.subsystems.DriveTrain;
@@ -44,6 +30,8 @@ public class Robot extends IterativeRobot {
 	public static Grimpeur grimpeur = new Grimpeur();
 	public static LanceBalle lanceBalle = new LanceBalle();
 	public static Camera cameraSubSystem = new Camera();
+
+	
 	public static AutonomousCommands autonomousCommands;
 	
 	/* END TOUS LES SOUS SYSTEMS DOIVENT ETRE DECLARER ICI */
@@ -75,7 +63,7 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
     	 oi = new OI();
     	    	 
-    	 initCamera();
+    	 //initCamera();
     }
 	
 	/**
@@ -84,7 +72,7 @@ public class Robot extends IterativeRobot {
 	 * the robot is disabled.
      */
     public void disabledInit(){
-
+    	
     }
 	
 	public void disabledPeriodic() {
@@ -117,7 +105,10 @@ public class Robot extends IterativeRobot {
     }
 
     public void teleopInit() {
-    	if (autonomousCommands != null) autonomousCommands.cancel();
+    	if (autonomousCommands != null) { 
+    		autonomousCommands.cancel();
+    		autonomousCommands = null;
+    	}
     	
     	driveTrain.enableMotors();
     	//driveTrain.setControlModeToSpeed();

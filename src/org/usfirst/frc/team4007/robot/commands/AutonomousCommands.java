@@ -15,7 +15,7 @@ public class AutonomousCommands extends CommandGroup {
 	DigitalInput switch1;
 	DigitalInput switch2;
 
-	public int config(){
+	/*public int config(){
 		if(switch0.get()) 
 			return 1;
 		
@@ -26,21 +26,23 @@ public class AutonomousCommands extends CommandGroup {
 			return 3;
 		
 		return 32 ;
-	}
+	}*/
 
 	public  AutonomousCommands() {
 		
-		addSequential ( new AutoDrive (4.37));
-		
-		//addSequential(new Forward());		
-		
+		addSequential (new AutoDrive (3.7));
+		addSequential (new Debug());
+		addSequential (new AutoDrive (-.55, 0.55));
+		addSequential (new Debug());
+		addSequential (new AutoDrive (2.0));
+		addSequential (new Debug());
 		//addSequential(new MakeTurn(MakeTurn.TurnSide.LEFT));
 		
 		//addSequential(new Forward());
 		
 		//addSequential(new MakeTurn(MakeTurn.TurnSide.RIGHT));
 		
-		switch0 = new DigitalInput(RobotMap.AutoLimit0);
+		/*switch0 = new DigitalInput(RobotMap.AutoLimit0);
 		switch1 = new DigitalInput(RobotMap.AutoLimit1);
 		switch2 = new DigitalInput(RobotMap.AutoLimit2);
 		
@@ -53,7 +55,7 @@ public class AutonomousCommands extends CommandGroup {
 			
 		default:
 			
-		}
+		}*/
 		
 		
 		/*

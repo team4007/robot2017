@@ -61,6 +61,6 @@ public class RobotMap {
 	public static final String camFront = "cam0";
 	public static final String camRear = "cam1";
 	
-	public static final boolean debugMode = false; 
+	public static final boolean debugMode = true; 
 	public static final int encodeurRoueClics = 2048;
 }

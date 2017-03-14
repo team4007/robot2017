@@ -1,7 +1,7 @@
 package org.usfirst.frc.team4007.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.GenericHID;
+//import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Joystick.AxisType;
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -42,9 +42,11 @@ public class DriveTrain extends Subsystem {
 		roueDroite.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		roueDroite.configEncoderCodesPerRev(RobotMap.encodeurRoueClics); // Config du AMT103 0b0000
 		roueDroite.enableBrakeMode(false);
+		roueDroite.reverseSensor(true);
+		roueDroite.enableBrakeMode(true);
 		
-//		roueDroite.configNominalOutputVoltage(0f, 0f);
-//		roueDroite.configPeakOutputVoltage(12.0f, -12.0f);
+		roueDroite.configNominalOutputVoltage(0f, 0f);
+		roueDroite.configPeakOutputVoltage(12.0f, -12.0f);
 //		roueDroite.setAllowableClosedLoopErr(0);
 //		roueDroite.setProfile(0);
 //		roueDroite.setF(0.0);
@@ -54,8 +56,8 @@ public class DriveTrain extends Subsystem {
 		
 		roueGauche.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		roueGauche.configEncoderCodesPerRev(RobotMap.encodeurRoueClics);
-		roueGauche.enableBrakeMode(false);
-		
+		roueGauche.enableBrakeMode(true);
+	
 		
 		//roueGauche.reverseOutput(true);
 	}
@@ -96,10 +98,10 @@ public class DriveTrain extends Subsystem {
     	//drive.arcadeDrive(rightStick);
     	drive.arcadeDrive(leftStick, leftStick.getAxisChannel(AxisType.kY), rightStick, rightStick.getAxisChannel(AxisType.kX));
  
-    	//drive.arcadeDrive(rightStick.getY(), leftStick.getX());
-    	if (RobotMap.debugMode) {
-    		System.out.println("Encodeur gauche" + roueGauche.getEncPosition());
-    	}
+//    	//drive.arcadeDrive(rightStick.getY(), leftStick.getX());
+//    	if (RobotMap.debugMode) {
+//    		System.out.println("Encodeur gauche" + roueGauche.getEncPosition());
+//    	}
     	    	
     }
     
@@ -141,6 +143,13 @@ public class DriveTrain extends Subsystem {
 		
 		roueGauche.setPosition(0);
 		roueDroite.setPosition(0);
+	}
+	
+	public void stopAll() {
+		roueGauche.set(0);
+		roueDroite.set(0);
+	
+		
 	}
 }
 

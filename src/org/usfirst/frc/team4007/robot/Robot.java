@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.vision.VisionThread;
 
+import org.usfirst.frc.team4007.robot.commands.AutoDrive;
 import org.usfirst.frc.team4007.robot.commands.AutonomousCommands;
 import org.usfirst.frc.team4007.robot.subsystems.Camera;
 import org.usfirst.frc.team4007.robot.subsystems.DriveTrain;
@@ -76,8 +77,8 @@ public class Robot extends IterativeRobot {
     }
 	
 	public void disabledPeriodic() {
-		
-		Scheduler.getInstance().run();
+		autonomousCommands = null; // DOIT ETRE NULLIFIIER POUR LIBERER LA COMMANDE DU ROBOT RIO SINON MENE DES CONFKLIT EN TELEOP
+		//Scheduler.getInstance().run();
 	}
 
 	/**
@@ -90,7 +91,20 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
+    	Robot.driveTrain.roueDroite.setEncPosition(0);
+    	Robot.driveTrain.roueGauche.setEncPosition(0);
+    	Robot.driveTrain.roueDroite.setPosition(0);
+    	Robot.driveTrain.roueGauche.setPosition(0);
+    	
     	autonomousCommands = new AutonomousCommands();
+    	
+    	//autonomousCommands.addSequential (new AutoDrive (4f,4f));
+    	//autonomousCommands.addSequential (new AutoDrive (-0.35f, 0.35f));
+    	//autonomousCommands.addSequential (new AutoDrive (2.5f,2.5f));
+    	
+    	//autonomousCommands.addSequential (new AutoDrive (-0.01f, 1.35f));    	
+    	//autonomousCommands.addSequential (new AutoDrive (2f,2f));
+    	
 		autonomousCommands.start();
 		
 		System.out.println(Thread.currentThread().getStackTrace()[0].getMethodName());
@@ -101,7 +115,6 @@ public class Robot extends IterativeRobot {
      */
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
-        
     }
 
     public void teleopInit() {

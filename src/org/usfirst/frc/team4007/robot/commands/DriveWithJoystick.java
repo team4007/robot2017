@@ -19,6 +19,11 @@ public class DriveWithJoystick extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	//System.out.println("DRIVE DESACTIVE DANS DRIVEWITHJOYSTICK.JAVA");
+    	// NE PAS OUBLIER DE RAMENER LE SENS DES MOTEUR DANS LE SENS DU MONDE APRES LE MODE AUTONOME!!!
+    	Robot.driveTrain.roueDroite.setInverted(false);
+    	Robot.driveTrain.roueGauche.setInverted(false);
+    	Robot.driveTrain.roueDroite.enableBrakeMode(true);
+    	Robot.driveTrain.roueGauche.enableBrakeMode(true);
     }
 
     // Called repeatedly when this Command is scheduled to run

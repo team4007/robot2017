@@ -8,16 +8,23 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class FreeGear extends Command {
-
+	private boolean commande_end_delay = false;
     public FreeGear() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.gear);
     }
 
+    public FreeGear(Boolean commande_end_delay) {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
+    	requires(Robot.gear);
+    	this.commande_end_delay = commande_end_delay;
+    }
+    
     // Called just before this Command runs the first time
     protected void initialize() {
-    	//System.out.println("timestamp init: " + Robot.gear.counter.readRisingTimestamp());
+    	System.out.println("***Debut ouverture de la Gate");
     	Robot.gear.demarreOuvre();
     }
 
@@ -38,6 +45,16 @@ public class FreeGear extends Command {
     // Called once after isFinished returns true
     protected void end() {
     	Robot.gear.arret();
+    	System.out.println("***Fin Ouverture de la Gate");
+    	if(this.commande_end_delay) // MODE AUTONOME SEULEMENT POUR LAISSER LE TEMPS A LA COMMANDE DE BIEN TERMINER
+    	{
+    		try {
+	 			Thread.sleep(2000);
+	 		} catch (InterruptedException e) {
+	 			// TODO Auto-generated catch block
+	 			e.printStackTrace();
+	 		}
+    	}
     }
 
     // Called when another command which requires one or more of the same

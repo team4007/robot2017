@@ -95,8 +95,8 @@ public class DriveTrain extends Subsystem {
     
     public void drive(Joystick leftStick, Joystick rightStick) {
     	//drive.tankDrive(leftStick, rightStick);
-    	//drive.arcadeDrive(rightStick);
-    	drive.arcadeDrive(leftStick, leftStick.getAxisChannel(AxisType.kY), rightStick, rightStick.getAxisChannel(AxisType.kX));
+    	drive.arcadeDrive(rightStick);
+    	//drive.arcadeDrive(leftStick, leftStick.getAxisChannel(AxisType.kY), rightStick, rightStick.getAxisChannel(AxisType.kX));
  
 //    	//drive.arcadeDrive(rightStick.getY(), leftStick.getX());
 //    	if (RobotMap.debugMode) {
@@ -107,9 +107,9 @@ public class DriveTrain extends Subsystem {
     
     public void setControlModeToSpeed(){
     	
-    	roueDroite.changeControlMode(TalonControlMode.Speed);
-    	roueGauche.changeControlMode(TalonControlMode.Follower);
-    	roueGauche.set(RobotMap.canTalonRouesDroites);
+  //  	roueDroite.changeControlMode(TalonControlMode.Speed);
+    //	roueGauche.changeControlMode(TalonControlMode.Follower);
+    	//roueGauche.set(RobotMap.canTalonRouesDroites);
     	
     }
     

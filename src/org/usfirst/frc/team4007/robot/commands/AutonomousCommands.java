@@ -11,11 +11,11 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class AutonomousCommands extends CommandGroup {
 
-	DigitalInput switch0;
-	DigitalInput switch1;
-	DigitalInput switch2;
+	DigitalInput switch0 = new DigitalInput(RobotMap.AutoLimit0);
+	DigitalInput switch1 = new DigitalInput(RobotMap.AutoLimit1);
+	DigitalInput switch2 = new DigitalInput(RobotMap.AutoLimit2);
 
-	/*public int config(){
+	public int config(){
 		if(switch0.get()) 
 			return 1;
 		
@@ -25,78 +25,52 @@ public class AutonomousCommands extends CommandGroup {
 		if(switch2.get()) 
 			return 3;
 		
-		return 32 ;
-	}*/
-
-	public  AutonomousCommands() {
-		
-		addSequential (new AutoDrive (3.7));
-		addSequential (new Debug());
-		addSequential (new AutoDrive (-.55, 0.55));
-		addSequential (new Debug());
-		addSequential (new AutoDrive (2.0));
-		addSequential (new Debug());
-		//addSequential(new MakeTurn(MakeTurn.TurnSide.LEFT));
-		
-		//addSequential(new Forward());
-		
-		//addSequential(new MakeTurn(MakeTurn.TurnSide.RIGHT));
-		
-		/*switch0 = new DigitalInput(RobotMap.AutoLimit0);
-		switch1 = new DigitalInput(RobotMap.AutoLimit1);
-		switch2 = new DigitalInput(RobotMap.AutoLimit2);
-		
-		switch(config()){
-		case 1:
-		
-		case 2:
-			
-		case 3:
-			
-		default:
-			
-		}*/
-		
-		
-		/*
-		// SASSURER QUE TOUTES LES SWITCH AUTONOMES SONT PLUGGER
-		switch0 = new DigitalInput(0);
-
-		switch1 = new DigitalInput(1);
-
-		//switch2 = new DigitalInput(2);
-
-		//int switch2Value = switch2.get() ? 1 : 0;
-
-
-		switch(config()){
-		case 0:
-			System.out.println("Start #0");
-			System.out.println("Autonome : Reste sur place");
-			//addSequential(new RunForestRun());;
-			break;
-		case 1:
-			System.out.println("Start #1");
-			addSequential(new Forward());;
-			break;
-		case 2:
-			System.out.println("Start #2");    		
-			addSequential(new Forward());;
-			break;
-		case 3:
-			System.out.println("Start #3");
-			addSequential(new Forward());;
-		}   */   
-	}	
+		return 2 ;
+	}
 
 	/*
+	 * MEMO DES CONSTANTES
+	 * +-1.7 = 180 degrer
+	 * */
+	public  AutonomousCommands() {
+		super();
+		// Positionnement du robot sur l'objectif "GEAR"
+		
+		switch(config()){
+		case 1:
+			addSequential (new AutoDrive (4f,4f));
+	    	addSequential (new AutoDrive (-0.35f, 0.35f));
+	    	addSequential (new AutoDrive (2.5f,2.5f));
+	    	break;
+		case 2:
+			addSequential (new AutoDrive (5f,5f));
+			break;
+		case 3:
+			addSequential (new AutoDrive (4f,4f));
+	    	addSequential (new AutoDrive (0.35f, -0.35f));
+	    	addSequential (new AutoDrive (2.5f,2.5f));
+	    	break;
+		default:
+			break;
+		}
+		
+		// DEPOT ET LEGER RETRAIT DU ROBOT
+		
+		addSequential(new FreeGear(true));
+		
+		addSequential(new AutoDrive (-2f, -2f));
+		
+		addSequential(new ResetGear());
+		
+	}	
+
+	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
-    	Forward step1 = new Forward();
-    	step1.start();  
-    		  	
-    }  */
+    	//Forward step1 = new Forward();
+    	//step1.start();  
+    }  
 
 }
 
